@@ -1,0 +1,969 @@
+(() => {
+  const raw = `妙蛙種子|フシギダネ
+妙蛙草|フシギソウ
+妙蛙花|フシギバナ
+小火龍|ヒトカゲ
+火恐龍|リザード
+噴火龍|リザードン
+傑尼龜|ゼニガメ
+卡咪龜|カメール
+水箭龜|カメックス
+綠毛蟲|キャタピー
+鐵甲蛹|トランセル
+巴大蝶|バタフリー
+獨角蟲|ビードル
+鐵殼蛹|コクーン
+大針蜂|スピアー
+波波|ポッポ
+比比鳥|ピジョン
+大比鳥|ピジョット
+小拉達|コラッタ
+拉達|ラッタ
+烈雀|オニスズメ
+大嘴雀|オニドリル
+阿柏蛇|アーボ
+阿柏怪|アーボック
+皮卡丘|ピカチュウ
+雷丘|ライチュウ
+穿山鼠|サンド
+穿山王|サンドパン
+尼多蘭|ニドラン♀
+尼多娜|ニドリーナ
+尼多后|ニドクイン
+尼多朗|ニドラン♂
+尼多力諾|ニドリーノ
+尼多王|ニドキング
+皮皮|ピッピ
+皮可西|ピクシー
+六尾|ロコン
+九尾|キュウコン
+胖丁|プリン
+胖可丁|プクリン
+超音蝠|ズバット
+大嘴蝠|ゴルバット
+走路草|ナゾノクサ
+臭臭花|クサイハナ
+霸王花|ラフレシア
+派拉斯|パラス
+派拉斯特|パラセクト
+毛球|コンパン
+摩魯蛾|モルフォン
+地鼠|ディグダ
+三地鼠|ダグトリオ
+喵喵|ニャース
+貓老大|ペルシアン
+可達鴨|コダック
+哥達鴨|ゴルダック
+猴怪|マンキー
+火爆猴|オコリザル
+卡蒂狗|ガーディ
+風速狗|ウインディ
+蚊香蝌蚪|ニョロモ
+蚊香君|ニョロゾ
+蚊香泳士|ニョロボン
+凱西|ケーシィ
+勇基拉|ユンゲラー
+胡地|フーディン
+腕力|ワンリキー
+豪力|ゴーリキー
+怪力|カイリキー
+喇叭芽|マダツボミ
+口呆花|ウツドン
+大食花|ウツボット
+瑪瑙水母|メノクラゲ
+毒刺水母|ドククラゲ
+小拳石|イシツブテ
+隆隆石|ゴローン
+隆隆岩|ゴローニャ
+小火馬|ポニータ
+烈焰馬|ギャロップ
+呆呆獸|ヤドン
+呆殼獸|ヤドラン
+小磁怪|コイル
+三合一磁怪|レアコイル
+大蔥鴨|カモネギ
+嘟嘟|ドードー
+嘟嘟利|ドードリオ
+小海獅|パウワウ
+白海獅|ジュゴン
+臭泥|ベトベター
+臭臭泥|ベトベトン
+大舌貝|シェルダー
+刺甲貝|パルシェン
+鬼斯|ゴース
+鬼斯通|ゴースト
+耿鬼|ゲンガー
+大岩蛇|イワーク
+催眠貘|スリープ
+引夢貘人|スリーパー
+大鉗蟹|クラブ
+巨鉗蟹|キングラー
+霹靂電球|ビリリダマ
+頑皮雷彈|マルマイン
+蛋蛋|タマタマ
+椰蛋樹|ナッシー
+卡拉卡拉|カラカラ
+嘎啦嘎啦|ガラガラ
+飛腿郎|サワムラー
+快拳郎|エビワラー
+大舌頭|ベロリンガ
+瓦斯彈|ドガース
+雙彈瓦斯|マタドガス
+獨角犀牛|サイホーン
+鑽角犀獸|サイドン
+吉利蛋|ラッキー
+蔓藤怪|モンジャラ
+袋獸|ガルーラ
+墨海馬|タッツー
+海刺龍|シードラ
+角金魚|トサキント
+金魚王|アズマオウ
+海星星|ヒトデマン
+寶石海星|スターミー
+魔牆人偶|バリヤード
+飛天螳螂|ストライク
+迷唇姐|ルージュラ
+電擊獸|エレブー
+鴨嘴火獸|ブーバー
+凱羅斯|カイロス
+肯泰羅|ケンタロス
+鯉魚王|コイキング
+暴鯉龍|ギャラドス
+拉普拉斯|ラプラス
+百變怪|メタモン
+伊布|イーブイ
+水伊布|シャワーズ
+雷伊布|サンダース
+火伊布|ブースター
+多邊獸|ポリゴン
+菊石獸|オムナイト
+多刺菊石獸|オムスター
+化石盔|カブト
+鐮刀盔|カブトプス
+化石翼龍|プテラ
+卡比獸|カビゴン
+急凍鳥|フリーザー
+閃電鳥|サンダー
+火焰鳥|ファイヤー
+迷你龍|ミニリュウ
+哈克龍|ハクリュー
+快龍|カイリュー
+超夢|ミュウツー
+夢幻|ミュウ`;
+
+  const pokemon = raw.split("\n").map((line,i)=>{
+    const [zh,jp]=line.split("|");
+    return {id:i+1,zh,jp};
+  });
+
+  const STORAGE="pokemon-gen1-four-version-v2";
+  const state={
+    version:"green",
+    caught:{green:new Set(),red:new Set(),blue:new Set(),yellow:new Set()}
+  };
+
+  const notes={
+    green:"日版《ポケットモンスター 緑》",
+    red:"日版《ポケットモンスター 赤》",
+    blue:"日版《ポケットモンスター 青》",
+    yellow:"《ポケットモンスター ピカチュウ》"
+  };
+
+  const unavailable={
+    red:new Set([27,28,37,38,52,53,69,70,71,126,127]),
+    green:new Set([23,24,43,44,45,56,57,58,59,123,125]),
+    blue:new Set([23,24,37,38,56,57,69,70,71,125,126]),
+    yellow:new Set([13,14,15,23,24,26,52,53,109,110,124,125,126])
+  };
+
+  const evo={
+    2:["進化","妙蛙種子 Lv.16"],3:["進化","妙蛙草 Lv.32"],5:["進化","小火龍 Lv.16"],6:["進化","火恐龍 Lv.36"],
+    8:["進化","傑尼龜 Lv.16"],9:["進化","卡咪龜 Lv.36"],11:["進化","綠毛蟲 Lv.7"],12:["進化","鐵甲蛹 Lv.10"],
+    14:["進化","獨角蟲 Lv.7"],15:["進化","鐵殼蛹 Lv.10"],17:["進化","波波 Lv.18"],18:["進化","比比鳥 Lv.36"],
+    20:["進化","小拉達 Lv.20"],22:["進化","烈雀 Lv.20"],24:["進化","阿柏蛇 Lv.22"],26:["道具進化","皮卡丘＋雷之石"],
+    28:["進化","穿山鼠 Lv.22"],30:["進化","尼多蘭 Lv.16"],31:["道具進化","尼多娜＋月之石"],33:["進化","尼多朗 Lv.16"],
+    34:["道具進化","尼多力諾＋月之石"],36:["道具進化","皮皮＋月之石"],38:["道具進化","六尾＋火之石"],
+    40:["道具進化","胖丁＋月之石"],42:["進化","超音蝠 Lv.22"],44:["進化","走路草 Lv.21"],45:["道具進化","臭臭花＋葉之石"],
+    47:["進化","派拉斯 Lv.24"],49:["進化","毛球 Lv.31"],51:["進化","地鼠 Lv.26"],53:["進化","喵喵 Lv.28"],
+    55:["進化","可達鴨 Lv.33"],57:["進化","猴怪 Lv.28"],59:["道具進化","卡蒂狗＋火之石"],61:["進化","蚊香蝌蚪 Lv.25"],
+    62:["道具進化","蚊香君＋水之石"],64:["進化","凱西 Lv.16"],65:["交換進化","勇基拉交換進化"],67:["進化","腕力 Lv.28"],
+    68:["交換進化","豪力交換進化"],70:["進化","喇叭芽 Lv.21"],71:["道具進化","口呆花＋葉之石"],73:["進化","瑪瑙水母 Lv.30"],
+    75:["進化","小拳石 Lv.25"],76:["交換進化","隆隆石交換進化"],78:["進化","小火馬 Lv.40"],80:["進化","呆呆獸 Lv.37"],
+    82:["進化","小磁怪 Lv.30"],85:["進化","嘟嘟 Lv.31"],87:["進化","小海獅 Lv.34"],89:["進化","臭泥 Lv.38"],
+    91:["道具進化","大舌貝＋水之石"],93:["進化","鬼斯 Lv.25"],94:["交換進化","鬼斯通交換進化"],97:["進化","催眠貘 Lv.26"],
+    99:["進化","大鉗蟹 Lv.28"],101:["進化","霹靂電球 Lv.30"],103:["道具進化","蛋蛋＋葉之石"],105:["進化","卡拉卡拉 Lv.28"],
+    110:["進化","瓦斯彈 Lv.35"],112:["進化","獨角犀牛 Lv.42"],117:["進化","墨海馬 Lv.32"],119:["進化","角金魚 Lv.33"],
+    121:["道具進化","海星星＋水之石"],130:["進化","鯉魚王 Lv.20"],134:["道具進化","伊布＋水之石"],
+    135:["道具進化","伊布＋雷之石"],136:["道具進化","伊布＋火之石"],139:["進化","菊石獸 Lv.40"],
+    141:["進化","化石盔 Lv.40"],148:["進化","迷你龍 Lv.30"],149:["進化","哈克龍 Lv.55"]
+  };
+
+  const common={
+    10:["野外","常磐森林"],13:["野外","常磐森林"],16:["野外","1號道路等"],19:["野外","1號道路等"],
+    21:["野外","3號道路等"],25:["野外","常磐森林等"],29:["野外","22號道路／狩獵地帶"],32:["野外","22號道路／狩獵地帶"],
+    35:["野外","月見山"],39:["野外","3號道路"],41:["野外","月見山等洞窟"],46:["野外","月見山／狩獵地帶"],
+    48:["野外","12～15號道路等"],50:["野外","地鼠洞穴"],54:["野外","雙子島等"],60:["釣魚","各地水域"],
+    63:["野外","24、25號道路"],66:["野外","岩山隧道／冠軍之路"],72:["衝浪","19～21號道路等水域"],
+    74:["野外","月見山／岩山隧道"],77:["野外","紅蓮島寶可夢屋"],79:["野外","雙子島等"],81:["野外","無人發電廠"],
+    84:["野外","16～18號道路／狩獵地帶"],86:["野外","雙子島"],88:["野外","紅蓮島寶可夢屋"],90:["野外","雙子島"],
+    92:["野外","寶可夢塔"],95:["野外","岩山隧道／冠軍之路"],96:["野外","11號道路"],98:["野外","雙子島等"],
+    100:["野外","無人發電廠"],102:["野外","狩獵地帶"],104:["野外","寶可夢塔"],109:["野外","紅蓮島寶可夢屋"],
+    111:["野外","狩獵地帶"],113:["野外","狩獵地帶，低機率"],114:["野外","21號道路"],115:["野外","狩獵地帶"],
+    116:["釣魚","各地水域"],118:["釣魚","各地水域"],120:["釣魚／野外","雙子島及各地水域"],127:["野外","狩獵地帶"],
+    128:["野外","狩獵地帶"],129:["釣魚","破舊釣竿即可"],131:["贈送","西爾佛公司"],132:["野外","13～15號道路／華藍洞窟"],
+    133:["贈送","彩虹市公寓頂樓"],137:["兌換","彩虹遊戲中心"],138:["化石","月見山二選一 → 紅蓮島研究所復原"],
+    140:["化石","月見山二選一 → 紅蓮島研究所復原"],142:["化石","秘密琥珀 → 紅蓮島研究所復原"],
+    143:["固定遭遇","12號／16號道路，用寶可夢之笛"],144:["固定遭遇","雙子島深處"],145:["固定遭遇","無人發電廠"],
+    146:["固定遭遇","冠軍之路"],147:["釣魚","狩獵地帶使用超級釣竿"],150:["固定遭遇","華藍洞窟最深處"],
+    151:["特殊","正常遊戲流程無法取得"]
+  };
+
+  const redSpecial={
+    23:["野外","4、8、9、10號道路等"],43:["野外","5、6、7、12～15、24、25號道路"],
+    56:["野外","5～8號道路"],58:["野外","7、8號道路／寶可夢屋"],123:["野外／兌換","狩獵地帶／彩虹遊戲中心"],
+    125:["野外","無人發電廠"]
+  };
+  const greenSpecial={
+    27:["野外","4、8、9、10號道路等"],37:["野外","7、8號道路／寶可夢屋"],
+    52:["野外","5～8號道路"],69:["野外","5、6、7、12～15、24、25號道路"],
+    126:["野外","寶可夢屋"],127:["野外／兌換","狩獵地帶／彩虹遊戲中心"]
+  };
+  const blueSpecial={
+    76:["NPC交換","日版藍可透過遊戲內交換取得隆隆岩"],
+    94:["NPC交換","日版藍可透過遊戲內交換取得耿鬼"],
+    108:["野外","日版藍可直接野外取得"],
+    124:["野外","日版藍可直接野外取得"]
+  };
+  const yellowSpecial={
+    1:["贈送","華藍市取得妙蛙種子"],
+    4:["贈送","24號道路附近取得小火龍"],
+    7:["贈送","枯葉市取得傑尼龜"],
+    25:["初始夥伴","遊戲開始時取得皮卡丘"],
+    43:["野外","黃版可野外取得"],
+    56:["野外","黃版可野外取得"],
+    58:["野外","黃版可野外取得"],
+    68:["NPC交換","黃版可透過遊戲內交換取得怪力"],
+    69:["野外","黃版可野外取得"],
+    123:["野外","狩獵地帶"],
+    127:["野外","狩獵地帶"]
+  };
+
+  const evoFrom={
+    2:1,3:2,5:4,6:5,8:7,9:8,11:10,12:11,14:13,15:14,17:16,18:17,20:19,22:21,24:23,26:25,28:27,30:29,31:30,33:32,34:33,36:35,38:37,40:39,42:41,44:43,45:44,47:46,49:48,51:50,53:52,55:54,57:56,59:58,61:60,62:61,64:63,65:64,67:66,68:67,70:69,71:70,73:72,75:74,76:75,78:77,80:79,82:81,85:84,87:86,89:88,91:90,93:92,94:93,97:96,99:98,101:100,103:102,105:104,110:109,112:111,117:116,119:118,121:120,130:129,134:133,135:133,136:133,139:138,141:140,148:147,149:148
+  };
+
+  const oneChoiceGroups={
+    starters:[1,4,7],
+    fossils:[138,140],
+    dojo:[106,107],
+    eevee:[134,135,136]
+  };
+
+
+
+
+  // 第一世代關都道路野生遭遇目標。
+  // 重要：道路資料必須依版本分開，不能再用「四版本聯集＋全域 unavailable」推算。
+  // 這裡以草叢／衝浪可隨機遇到的野生寶可夢為主；NPC交換、贈送、定點與購買由其他取得方式處理。
+  const routeData={
+    1:{
+      red:[16,19], green:[16,19], blue:[16,19], yellow:[16,19]
+    },
+    2:{
+      red:[13,16,19], green:[10,16,19], blue:[10,16,19], yellow:[16,19,29,32]
+    },
+    3:{
+      red:[16,21,39], green:[16,21,39], blue:[16,21,39], yellow:[19,21,27,56]
+    },
+    4:{
+      red:[19,21,23], green:[19,21,27], blue:[19,21,27], yellow:[19,21,27,56]
+    },
+    5:{
+      red:[16,43,56], green:[16,52,69], blue:[16,43,52], yellow:[16,17,19,39,63]
+    },
+    6:{
+      red:[16,43,56], green:[16,52,69], blue:[16,43,52], yellow:[16,17,19,39,54,55,63]
+    },
+    7:{
+      red:[16,43,56,58], green:[16,37,52,69], blue:[16,43,52,58], yellow:[16,17,19,39,63]
+    },
+    8:{
+      red:[16,23,56,58], green:[16,27,37,52], blue:[16,27,52,58], yellow:[16,17,19,39,63,64]
+    },
+    9:{
+      red:[19,21,23], green:[19,21,27], blue:[19,21,27], yellow:[19,20,21,22,29,30,32,33]
+    },
+    10:{
+      red:[21,23,100], green:[21,27,100], blue:[21,27,100], yellow:[19,20,29,32,66,81]
+    },
+    11:{
+      red:[21,23,96], green:[21,27,96], blue:[21,27,96], yellow:[16,17,19,20,96]
+    },
+    12:{
+      red:[16,43,44,48], green:[16,48,69,70], blue:[16,43,44,48], yellow:[16,17,43,44,69,70,79,80,83]
+    },
+    13:{
+      red:[16,43,44,48,132], green:[16,48,69,70,132], blue:[16,43,44,48,132], yellow:[16,17,43,44,69,70,79,80,83]
+    },
+    14:{
+      red:[16,17,43,44,48,132], green:[16,17,48,69,70,132], blue:[16,17,43,44,48,132], yellow:[17,43,44,48,49,69,70]
+    },
+    15:{
+      red:[16,17,43,44,48,132], green:[16,17,48,69,70,132], blue:[16,17,43,44,48,132], yellow:[17,43,44,48,49,69,70]
+    },
+    16:{
+      red:[19,20,21,84], green:[19,20,21,84], blue:[19,20,21,84], yellow:[19,20,21,22,84]
+    },
+    17:{
+      red:[20,21,22,84], green:[20,21,22,84], blue:[20,21,22,84], yellow:[22,77,84,85]
+    },
+    18:{
+      red:[20,21,22,84], green:[20,21,22,84], blue:[20,21,22,84], yellow:[19,20,21,22,84]
+    },
+    19:{
+      red:[72], green:[72], blue:[72], yellow:[72]
+    },
+    20:{
+      red:[72], green:[72], blue:[72], yellow:[72]
+    },
+    21:{
+      red:[16,17,19,20,72,114], green:[16,17,19,20,72,114], blue:[16,17,19,20,72,114], yellow:[16,17,19,20,72]
+    },
+    22:{
+      red:[19,21,29,32], green:[19,21,29,32], blue:[19,21,29,32], yellow:[19,21,29,32,56]
+    },
+    23:{
+      red:[21,22,23,24,132], green:[21,22,27,28,132], blue:[21,22,27,28,132], yellow:[22,30,33,56,57]
+    },
+    24:{
+      red:[13,14,16,43,63], green:[10,11,16,63,69], blue:[10,11,16,43,63], yellow:[16,17,43,48,69]
+    },
+    25:{
+      red:[10,11,13,14,16,43,63], green:[10,11,13,14,16,63,69], blue:[10,11,13,14,16,43,63], yellow:[16,17,43,48,69]
+    }
+  };
+
+  function routeTargets(n){
+    return [...(routeData[n]?.[state.version]||[])];
+  }
+
+
+  function routeStatus(n){
+    const targets=routeTargets(n);
+    if(!targets.length) return "empty";
+    const remain=targets.filter(id=>!current().has(id));
+    return remain.length===0 ? "done" : "todo";
+  }
+
+  function renderTargetList(title,note,targets){
+    const list=document.getElementById("areaPokemon");
+    document.getElementById("areaTitle").textContent=title;
+    document.getElementById("areaNote").textContent=note;
+    const caughtCount=targets.filter(id=>current().has(id)).length;
+    document.getElementById("areaCaught").textContent=caughtCount;
+    document.getElementById("areaTotal").textContent=targets.length;
+    document.getElementById("areaBar").style.width=(targets.length?caughtCount/targets.length*100:0)+"%";
+
+    const remain=targets.filter(id=>!current().has(id));
+    const practical=remain.filter(id=>targetStatus(id)==="todo");
+    const trade=remain.filter(id=>targetStatus(id)==="trade");
+    const replay=remain.filter(id=>targetStatus(id)==="replay");
+    const advice=document.getElementById("areaAdvice");
+
+    if(!targets.length){
+      advice.innerHTML=`<strong>此區目前沒有固定圖鑑目標</strong><br>${note}`;
+      list.innerHTML='<div class="map-empty">目前沒有需要列出的固定捕獲目標。</div>';
+      return;
+    }
+    if(!remain.length){
+      advice.innerHTML=`<strong style="color:var(--ok)">✓ 這個地區目前已完成</strong><br>這裡列出的圖鑑目標都已捕獲。`;
+    }else if(practical.length){
+      const names=practical.slice(0,3).map(id=>pokemon[id-1].zh).join("、");
+      advice.innerHTML=`<strong>目前建議</strong><br>這區還有 ${remain.length} 個目標；可以先處理 <b>${names}</b>${practical.length>3?" 等":""}。`;
+    }else{
+      advice.innerHTML=`<strong>此區直接可做項目已處理完</strong><br>剩餘 ${trade.length} 個需要交換，${replay.length} 個屬於二選一／重玩類型。`;
+    }
+
+    list.innerHTML=targets.map(id=>{
+      const p=pokemon[id-1];
+      const got=current().has(id);
+      const a=acquire(id);
+      let stateText=got?"✓ 已捕獲":"○ 未捕獲";
+      if(!got && a[0]==="需要交換") stateText="⇄ 需要交換";
+      else if(!got && choiceBlocked(id)) stateText="↻ 重玩／交換";
+      return `<button type="button" class="map-poke ${got?"caught":"todo"}" data-poke="${id}">
+        <img src="${imageUrl(id)}" alt="${p.zh}">
+        <span class="mp-info">
+          <span class="mp-name">No.${pad(id)} ${p.zh} <span class="jp">${p.jp}</span></span>
+          <span class="mp-method">${a[0]}・${a[1]}</span>
+        </span>
+        <span class="mp-state">${stateText}</span>
+      </button>`;
+    }).join("");
+  }
+
+  const routePoints=[
+    {n:1,x:19.9,y:61.6},{n:2,x:19.9,y:42.0},{n:3,x:28.6,y:19.6},{n:4,x:48.7,y:14.2},
+    {n:5,x:57.7,y:45.2},{n:6,x:57.7,y:23.9},{n:7,x:50.5,y:30.5},{n:8,x:68.5,y:33.4},
+    {n:9,x:68.8,y:14.2},{n:10,x:77.1,y:26.5},{n:11,x:68.0,y:57.0},{n:12,x:77.5,y:50.2},
+    {n:13,x:70.7,y:71.3},{n:14,x:62.7,y:76.8},{n:15,x:57.0,y:82.0},{n:16,x:35.2,y:33.1},
+    {n:17,x:29.0,y:50.8},{n:18,x:28.8,y:79.3},{n:19,x:48.6,y:90.8},{n:20,x:42.1,y:95.1},
+    {n:21,x:19.8,y:86.3},{n:22,x:13.0,y:51.5},{n:23,x:10.0,y:44.5},{n:24,x:58.2,y:7.4},
+    {n:25,x:64.3,y:2.9}
+  ];
+
+  const mapAreas=[
+    // 依照開哥在 IMG_0850.jpeg 上手寫標記重新定位；道路座標維持 v4 定稿。
+    {id:"league",name:"石英聯盟",x:9.2,y:8.5,targets:[],note:"寶可夢聯盟／四天王所在地。"},
+    {id:"victory",name:"冠軍之路",x:9.2,y:26.0,targets:[66,67,74,75,95,111,112,146],note:"通往石英聯盟的後期洞窟；包含火焰鳥等重要目標。"},
+    {id:"pewter",name:"尼比市",x:19.8,y:20.0,targets:[],note:"尼比市；往東接 3 號道路與月見山。"},
+    {id:"moon",name:"月見山",x:39.0,y:14.5,targets:[35,41,46,74,138,140],note:"月見山洞窟；包含化石二選一。"},
+    {id:"diglett",name:"地鼠洞穴",x:24.8,y:26.0,targets:[50,51],note:"地鼠與三地鼠的主要捕獲地點。"},
+    {id:"forest",name:"常磐森林",x:19.6,y:34.2,targets:[10,11,12,13,14,15,25],note:"前期蟲系與皮卡丘的重要捕獲區。"},
+    {id:"viridian",name:"常磐市",x:19.5,y:51.5,targets:[],note:"常磐市。"},
+    {id:"pallet",name:"真新鎮",x:19.5,y:69.5,targets:[1,4,7],note:"遊戲起點。紅／綠／藍為初始三選一；黃版取得方式不同。"},
+    {id:"ceruleanCave",name:"華藍洞窟",x:53.0,y:9.5,targetsByVersion:{
+      red:[24,26,40,42,47,49,60,64,80,82,85,97,99,101,105,112,113,117,118,119,129,132,150],
+      green:[26,28,40,42,47,49,60,64,80,82,85,97,99,101,105,112,113,117,118,119,129,132,150],
+      blue:[20,26,28,35,40,42,47,49,60,64,78,80,82,85,97,99,101,105,112,113,117,118,119,129,132,150],
+      yellow:[28,42,44,47,49,60,70,75,108,111,112,113,118,119,129,132,150]
+    },note:"華藍市西北側、通關後可進入；包含洞窟野生遭遇、釣魚與最深處的超夢。"},
+    {id:"cerulean",name:"華藍市",x:58.2,y:17.3,targets:[],note:"華藍市。"},
+    {id:"celadon",name:"彩虹市",x:43.5,y:33.0,targets:[133,137],note:"伊布贈送與遊戲中心兌換等特殊取得。"},
+    {id:"saffron",name:"金黃市",x:58.2,y:33.0,targets:[106,107,131],note:"格鬥道場二選一，以及西爾佛公司的拉普拉斯。"},
+    {id:"lavender",name:"紫苑鎮／寶可夢塔",x:77.5,y:33.0,targets:[92,93,94,104,105],note:"幽靈系與卡拉卡拉線的重要區域。"},
+    {id:"rock",name:"岩山隧道",x:77.7,y:20.5,targets:[41,66,74,75,95],note:"岩山隧道。"},
+    {id:"power",name:"無人發電廠",x:82.0,y:26.5,targets:[81,82,100,101,125,145],note:"電系集中區；包含閃電鳥。"},
+    {id:"vermilion",name:"枯葉市",x:58.2,y:58.0,targets:[83],note:"枯葉市；包含大蔥鴨的遊戲內交換等取得方式。"},
+    {id:"safari",name:"狩獵區",x:49.0,y:76.5,targets:[29,32,102,111,113,115,123,127,128,147],note:"位於淺紅市內／北側的大型捕獲區。"},
+    {id:"fuchsia",name:"淺紅市",x:49.0,y:84.0,targets:[],note:"淺紅市；狩獵區就在市區北側。"},
+    {id:"seafoam",name:"雙子島",x:33.0,y:94.0,targets:[54,55,79,80,86,87,90,91,98,99,116,117,120,121,144],note:"淺紅市與紅蓮島之間的雙子島；包含急凍鳥。"},
+    {id:"cinnabar",name:"紅蓮島",x:19.5,y:94.0,targets:[88,89,109,110,138,140,142],note:"紅蓮島；寶可夢屋與化石復原的重要據點。"}
+  ];
+
+  function load(){
+    try{
+      const data=JSON.parse(localStorage.getItem(STORAGE)||"{}");
+      if(data.version && state.caught[data.version]) state.version=data.version;
+      for(const v of ["green","red","blue","yellow"]){
+        state.caught[v]=new Set(Array.isArray(data[v])?data[v]:[]);
+      }
+    }catch(e){}
+  }
+  function save(){
+    const out={version:state.version};
+    for(const v of ["green","red","blue","yellow"]) out[v]=[...state.caught[v]].sort((a,b)=>a-b);
+    localStorage.setItem(STORAGE,JSON.stringify(out));
+  }
+  function imageUrl(id){
+    const base="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/";
+    return state.version==="yellow"
+      ? `${base}yellow/${id}.png`
+      : `${base}red-blue/${id}.png`;
+  }
+  function acquire(id){
+    if(id===151) return common[151];
+    if(unavailable[state.version].has(id)){
+      return ["需要交換","此版本正常流程無法取得，需從其他版本交換"];
+    }
+    if(state.version==="yellow" && yellowSpecial[id]) return yellowSpecial[id];
+    if(state.version==="blue" && blueSpecial[id]) return blueSpecial[id];
+    if(state.version==="red" && redSpecial[id]) return redSpecial[id];
+    if(state.version==="green" && greenSpecial[id]) return greenSpecial[id];
+    if(state.version!=="yellow" && [1,4,7].includes(id)){
+      return ["初始寶可夢","大木博士研究所三選一；另外兩隻需交換"];
+    }
+    if(evo[id]) return evo[id];
+    if(common[id]) return common[id];
+    if(id===83) return ["NPC交換","枯葉市用烈雀交換取得"];
+    if(id===106 || id===107) return ["贈送","金黃市格鬥道場二選一"];
+    if(id===108) return ["NPC交換","遊戲內 NPC 交換取得"];
+    if(id===122) return ["NPC交換","2號道路民宅以凱西交換"];
+    if(id===124) return ["NPC交換","遊戲內 NPC 交換取得"];
+    return ["野外","可於此版本關都地區野外／洞窟／水域取得"];
+  }
+
+  const grid=document.getElementById("grid");
+  const search=document.getElementById("search");
+  const uncaughtOnly=document.getElementById("uncaughtOnly");
+  const empty=document.getElementById("empty");
+  const backup=document.getElementById("backup");
+  const backupText=document.getElementById("backupText");
+  const backupTitle=document.getElementById("backupTitle");
+  const backupMsg=document.getElementById("backupMsg");
+  const applyImport=document.getElementById("applyImport");
+  const current=()=>state.caught[state.version];
+  const pad=n=>String(n).padStart(3,"0");
+
+
+  let activePage="dexPage";
+  let selectedAreaId="pallet";
+  let selectedRouteNo=null;
+
+  function areaById(id){ return mapAreas.find(a=>a.id===id) || mapAreas[0]; }
+
+  function areaTargetsFor(area){
+    const raw = area.targetsByVersion?.[state.version] ?? area.targets ?? [];
+    return raw.filter(id=>!unavailable[state.version].has(id));
+  }
+
+  function targetStatus(id){
+    if(current().has(id)) return "caught";
+    const a=acquire(id);
+    if(a[0]==="需要交換") return "trade";
+    if(choiceBlocked(id)) return "replay";
+    return "todo";
+  }
+
+
+  function renderRouteHotspots(){
+    const stage=document.getElementById("mapStage");
+    if(!stage) return;
+    stage.querySelectorAll(".route-hotspot").forEach(x=>x.remove());
+    routePoints.forEach(r=>{
+      const b=document.createElement("button");
+      b.type="button";
+      b.className="route-hotspot "+routeStatus(r.n);
+      b.style.left=r.x+"%";
+      b.style.top=r.y+"%";
+      b.title=r.n+"號道路";
+      b.setAttribute("aria-label",r.n+"號道路");
+      b.textContent=String(r.n);
+      b.addEventListener("click",()=>{
+        selectedRouteNo=r.n;
+        selectedAreaId=null;
+        document.getElementById("mapVersionName").textContent=notes[state.version];
+        renderTargetList(
+          r.n+"號道路",
+          r.n+"號道路・"+notes[state.version]+"。下方只列出目前版本在此區域可直接遇到／取得的第一世代圖鑑目標。",
+          routeTargets(r.n)
+        );
+        renderMapHotspots();
+        stage.querySelectorAll(".route-hotspot").forEach(x=>x.classList.toggle("active",Number(x.textContent)===r.n));
+      });
+      stage.appendChild(b);
+    });
+  }
+
+  function renderMapHotspots(){
+    const stage=document.getElementById("mapStage");
+    if(!stage) return;
+    stage.querySelectorAll(".hotspot").forEach(x=>x.remove());
+    renderRouteHotspots();
+
+    mapAreas.forEach(area=>{
+      const targets=areaTargetsFor(area);
+      const statuses=targets.map(targetStatus);
+      const done=targets.length>0 && statuses.every(s=>s==="caught");
+      const b=document.createElement("button");
+      b.type="button";
+      b.className="hotspot"+(done?" done":"")+(targets.length===0?" empty-target":"")+(selectedRouteNo===null && selectedAreaId===area.id?" active":"");
+      b.style.left=area.x+"%";
+      b.style.top=area.y+"%";
+      b.dataset.area=area.id;
+      b.title=area.name;
+      b.setAttribute("aria-label",area.name);
+      stage.appendChild(b);
+    });
+  }
+
+  function renderAreaSelect(){
+    const sel=document.getElementById("areaSelectMobile");
+    if(!sel) return;
+    sel.innerHTML=mapAreas.map(a=>`<option value="${a.id}" ${a.id===selectedAreaId?"selected":""}>${a.name}</option>`).join("");
+  }
+
+  function renderMap(){
+    if(selectedRouteNo!==null){
+      document.getElementById("mapVersionName").textContent=notes[state.version];
+      renderTargetList(
+        selectedRouteNo+"號道路",
+        selectedRouteNo+"號道路・"+notes[state.version]+"。下方只列出目前版本在此區域可直接遇到／取得的第一世代圖鑑目標。",
+        routeTargets(selectedRouteNo)
+      );
+      renderMapHotspots();
+      renderAreaSelect();
+      return;
+    }
+    const area=areaById(selectedAreaId);
+    const list=document.getElementById("areaPokemon");
+    if(!list) return;
+
+    document.getElementById("mapVersionName").textContent=notes[state.version];
+    document.getElementById("areaTitle").textContent=area.name;
+    document.getElementById("areaNote").textContent=area.note;
+
+    const areaTargets=areaTargetsFor(area);
+    const caughtCount=areaTargets.filter(id=>current().has(id)).length;
+    document.getElementById("areaCaught").textContent=caughtCount;
+    document.getElementById("areaTotal").textContent=areaTargets.length;
+    document.getElementById("areaBar").style.width=(areaTargets.length?caughtCount/areaTargets.length*100:0)+"%";
+
+    const remain=areaTargets.filter(id=>!current().has(id));
+    const practical=remain.filter(id=>{
+      const s=targetStatus(id);
+      return s==="todo";
+    });
+    const trade=remain.filter(id=>targetStatus(id)==="trade");
+    const replay=remain.filter(id=>targetStatus(id)==="replay");
+
+    const advice=document.getElementById("areaAdvice");
+    if(areaTargets.length===0){
+      advice.innerHTML=`<strong>城市／路線節點</strong><br>${area.note}`;
+    }else if(remain.length===0){
+      advice.innerHTML=`<strong style="color:var(--ok)">✓ 這個地區目前已完成</strong><br>這裡列出的圖鑑目標都已捕獲。`;
+    }else if(practical.length){
+      const names=practical.slice(0,3).map(id=>pokemon[id-1].zh).join("、");
+      advice.innerHTML=`<strong>目前建議</strong><br>這區還有 ${remain.length} 個目標；可以先處理 <b>${names}</b>${practical.length>3?" 等":""}。`;
+    }else{
+      advice.innerHTML=`<strong>此區直接可做項目已處理完</strong><br>剩餘 ${trade.length} 個需要交換，${replay.length} 個屬於二選一／重玩類型。`;
+    }
+
+    if(areaTargets.length===0){
+      list.innerHTML='<div class="map-empty">這個節點目前不放固定捕獲清單；之後可以再擴充成道路、商店、NPC 交換或劇情攻略。</div>';
+    }else{
+      list.innerHTML=areaTargets.map(id=>{
+        const p=pokemon[id-1];
+        const got=current().has(id);
+        const a=acquire(id);
+        let stateText=got?"✓ 已捕獲":"○ 未捕獲";
+        if(!got && a[0]==="需要交換") stateText="⇄ 需要交換";
+        else if(!got && choiceBlocked(id)) stateText="↻ 重玩／交換";
+        return `<button type="button" class="map-poke ${got?"caught":"todo"}" data-poke="${id}">
+          <img src="${imageUrl(id)}" alt="${p.zh}">
+          <span class="mp-info">
+            <span class="mp-name">No.${pad(id)} ${p.zh} <span class="jp">${p.jp}</span></span>
+            <span class="mp-method">${a[0]}・${a[1]}</span>
+          </span>
+          <span class="mp-state">${stateText}</span>
+        </button>`;
+      }).join("");
+    }
+
+    renderMapHotspots();
+    renderAreaSelect();
+  }
+
+  function setArea(id,scroll=false){
+    selectedRouteNo=null;
+    selectedAreaId=id;
+    renderMap();
+    if(scroll && window.innerWidth<=900){
+      document.getElementById("areaPanel")?.scrollIntoView({behavior:"smooth",block:"start"});
+    }
+  }
+
+  function setPage(pageId){
+    activePage=pageId;
+    document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===pageId));
+    document.querySelectorAll(".main-tab").forEach(b=>b.classList.toggle("active",b.dataset.page===pageId));
+    if(pageId==="mapPage") renderMap();
+  }
+
+  function choiceBlocked(id){
+    const groups=[];
+    if(state.version!=="yellow") groups.push(oneChoiceGroups.starters);
+    groups.push(oneChoiceGroups.fossils,oneChoiceGroups.dojo,oneChoiceGroups.eevee);
+    for(const group of groups){
+      if(group.includes(id) && group.some(x=>x!==id && current().has(x))) return true;
+    }
+    return false;
+  }
+
+  function buildGuide(){
+    const guide=document.getElementById("guide");
+    if(!uncaughtOnly.checked){ guide.classList.remove("show"); return; }
+    guide.classList.add("show");
+
+    const uncaught=pokemon.filter(p=>!current().has(p.id));
+    const actionable=[];
+    const catchable=[];
+    const trade=[];
+    const replay=[];
+
+    for(const p of uncaught){
+      const a=acquire(p.id);
+      const source=evoFrom[p.id];
+      if(source && current().has(source)){
+        actionable.push({p,a,source});
+        continue;
+      }
+      if(choiceBlocked(p.id)){
+        replay.push({p,a});
+        continue;
+      }
+      if(a[0]==="需要交換"){
+        trade.push({p,a});
+        continue;
+      }
+      if(source && !current().has(source)){
+        // 進化來源本身還沒有：等來源捕獲後再列為立即可做。
+        continue;
+      }
+      catchable.push({p,a});
+    }
+
+    const summary=document.getElementById("guideSummary");
+    const list=document.getElementById("guideList");
+    list.innerHTML="";
+
+    if(uncaught.length===0){
+      summary.innerHTML='<span class="guide-done">✓ 151 隻全部完成。</span>';
+      return;
+    }
+
+    const practical=actionable.length+catchable.length;
+    if(practical===0){
+      summary.innerHTML=`<span class="guide-done">✓ 依目前內建資料，你這個版本可直接捕獲／由現有寶可夢完成的項目已處理完。</span><br>剩餘 ${trade.length+replay.length} 隻主要需要版本交換、一次性選擇的另一條路線，或重玩取得。`;
+    }else{
+      summary.textContent=`目前還有 ${practical} 個可在這個存檔繼續處理的目標。先列最容易完成的項目：`;
+    }
+
+    const rows=[];
+    actionable.slice(0,6).forEach(x=>{
+      const src=pokemon[x.source-1];
+      rows.push(`<div class="guide-item"><span class="guide-pill">現在可做</span><strong>${x.p.zh}</strong>：你已經有 ${src.zh}，${x.a[1]}。</div>`);
+    });
+    catchable.slice(0,6).forEach(x=>{
+      rows.push(`<div class="guide-item"><span class="guide-pill">去取得</span><strong>${x.p.zh}</strong>：${x.a[1]}。</div>`);
+    });
+    if(practical===0){
+      if(trade.length) rows.push(`<div class="guide-item"><span class="guide-pill">交換</span>還有 <strong>${trade.length}</strong> 隻需要其他版本傳送／交換。</div>`);
+      if(replay.length) rows.push(`<div class="guide-item"><span class="guide-pill">重玩／交換</span>還有 <strong>${replay.length}</strong> 隻屬於御三家、化石、格鬥道場或伊布進化等一次性選擇。</div>`);
+    }else if(trade.length || replay.length){
+      rows.push(`<div class="guide-item"><span class="guide-pill">之後處理</span>另有 ${trade.length+replay.length} 隻需要交換或一次性選擇的另一條路線。</div>`);
+    }
+    list.innerHTML=rows.join("");
+  }
+
+  function updateHeader(){
+    const c=current().size;
+    const p=Math.round(c/151*100);
+    document.getElementById("caughtCount").textContent=c;
+    document.getElementById("percent").textContent=p;
+    document.getElementById("bar").style.width=p+"%";
+    document.getElementById("versionNote").textContent=notes[state.version];
+    document.getElementById("notice").classList.toggle("show",uncaughtOnly.checked);
+    document.querySelectorAll(".version").forEach(b=>{
+      b.classList.toggle("active",b.dataset.version===state.version);
+    });
+  }
+
+  function render(){
+    updateHeader();
+    buildGuide();
+    if(activePage==="mapPage") renderMap();
+    document.getElementById("imageError").classList.remove("show");
+    const q=search.value.trim().toLowerCase();
+    grid.innerHTML="";
+    let shown=0;
+
+    pokemon.forEach(p=>{
+      const got=current().has(p.id);
+      if(uncaughtOnly.checked && got) return;
+      if(q && !p.zh.toLowerCase().includes(q) && !p.jp.toLowerCase().includes(q) && !pad(p.id).includes(q) && String(p.id)!==q) return;
+
+      shown++;
+      const m=acquire(p.id);
+      const b=document.createElement("button");
+      b.type="button";
+      b.className=`card ${got?"caught":"uncaught"}`;
+      b.dataset.id=p.id;
+      b.innerHTML=`
+        <span class="imgbox">
+          <img class="pokeimg" src="${imageUrl(p.id)}" alt="${p.zh}" loading="lazy">
+        </span>
+        <span class="info">
+          <span class="no">No.${pad(p.id)}</span>
+          <span class="name">${p.zh}<span class="jp">${p.jp}</span></span>
+          <span class="state">${got?"✓ 已捕獲":"○ 未捕獲"}</span>
+          ${uncaughtOnly.checked?`<span class="method"><span class="tag ${m[0]==="需要交換"?"trade":""}">${m[0]}</span>${m[1]}</span>`:""}
+        </span>`;
+      const img=b.querySelector("img");
+      img.addEventListener("error",()=>{
+        img.style.display="none";
+        document.getElementById("imageError").classList.add("show");
+      });
+      grid.appendChild(b);
+    });
+
+    empty.classList.toggle("show",shown===0);
+  }
+
+  grid.addEventListener("click",e=>{
+    const card=e.target.closest(".card");
+    if(!card)return;
+    const id=Number(card.dataset.id);
+    current().has(id)?current().delete(id):current().add(id);
+    save();
+    render();
+  });
+
+  document.querySelectorAll(".version").forEach(b=>{
+    b.addEventListener("click",()=>{
+      state.version=b.dataset.version;
+      save();
+      render();
+    });
+  });
+
+  search.addEventListener("input",render);
+  uncaughtOnly.addEventListener("change",render);
+
+  document.getElementById("clearBtn").addEventListener("click",()=>{
+    if(confirm("確定要清除目前版本的捕獲紀錄嗎？")){
+      current().clear();
+      save();
+      render();
+    }
+  });
+
+  
+  let importMode=null;
+
+  function openBackup(title, value, message, allowApply=false){
+    backup.classList.add("show");
+    backupTitle.textContent=title;
+    backupText.value=value || "";
+    applyImport.style.display=allowApply ? "inline-block" : "none";
+    backupMsg.textContent=message || "";
+    backupText.focus();
+    if(value) backupText.select();
+  }
+
+  document.getElementById("exportCurrentBtn").addEventListener("click",()=>{
+    const out={
+      format:"pokemon-gen1-single-version-backup",
+      version:state.version,
+      caught:[...state.caught[state.version]].sort((a,b)=>a-b)
+    };
+    importMode=null;
+    openBackup(
+      `匯出目前版本：${notes[state.version]}`,
+      JSON.stringify(out),
+      "這份備份只包含目前這一個版本的捕獲紀錄。"
+    );
+  });
+
+  document.getElementById("importCurrentBtn").addEventListener("click",()=>{
+    importMode="single";
+    openBackup(
+      `匯入目前版本：${notes[state.version]}`,
+      "",
+      "貼上單版本備份後按「套用匯入」。只會覆蓋目前正在看的版本。",
+      true
+    );
+  });
+
+  document.getElementById("exportAllBtn").addEventListener("click",()=>{
+    const out={
+      format:"pokemon-gen1-four-version-backup",
+      version:state.version,
+      green:[...state.caught.green].sort((a,b)=>a-b),
+      red:[...state.caught.red].sort((a,b)=>a-b),
+      blue:[...state.caught.blue].sort((a,b)=>a-b),
+      yellow:[...state.caught.yellow].sort((a,b)=>a-b)
+    };
+    importMode=null;
+    openBackup(
+      "匯出四色紀錄",
+      JSON.stringify(out),
+      "這份備份會一次包含紅、綠、藍、黃四個版本的捕獲紀錄。"
+    );
+  });
+
+  document.getElementById("importAllBtn").addEventListener("click",()=>{
+    importMode="all";
+    openBackup(
+      "匯入四色紀錄",
+      "",
+      "貼上四色備份後按「套用匯入」。會一次覆蓋紅、綠、藍、黃四個版本。",
+      true
+    );
+  });
+
+  applyImport.addEventListener("click",()=>{
+    try{
+      const data=JSON.parse(backupText.value);
+      if(!data || typeof data!=="object") throw new Error("格式錯誤");
+
+      if(importMode==="single"){
+        const arr = Array.isArray(data.caught)
+          ? data.caught
+          : (Array.isArray(data[state.version]) ? data[state.version] : null);
+
+        if(!arr) throw new Error("缺少單版本資料");
+
+        state.caught[state.version]=new Set(
+          arr.map(Number).filter(n=>Number.isInteger(n)&&n>=1&&n<=151)
+        );
+
+        save();
+        backupMsg.textContent=`✓ 已匯入目前版本：${notes[state.version]}`;
+        render();
+        return;
+      }
+
+      if(importMode==="all"){
+        const versions=["green","red","blue","yellow"];
+        const next={};
+
+        for(const v of versions){
+          if(!Array.isArray(data[v])) throw new Error("缺少 "+v+" 版本資料");
+          next[v]=new Set(
+            data[v].map(Number).filter(n=>Number.isInteger(n)&&n>=1&&n<=151)
+          );
+        }
+
+        for(const v of versions) state.caught[v]=next[v];
+
+        if(data.version && versions.includes(data.version)){
+          state.version=data.version;
+        }
+
+        save();
+        backupMsg.textContent="✓ 四色版本紀錄已全部匯入";
+        render();
+        return;
+      }
+
+      throw new Error("未指定匯入模式");
+    }catch(e){
+      backupMsg.textContent="✕ 匯入失敗：請確認貼上的備份格式是否正確。";
+    }
+  });
+
+  document.getElementById("closeBackup").addEventListener("click",()=>{
+    backup.classList.remove("show");
+    backupMsg.textContent="";
+    importMode=null;
+  });
+
+
+  document.querySelectorAll(".main-tab").forEach(b=>{
+    b.addEventListener("click",()=>setPage(b.dataset.page));
+  });
+
+  document.getElementById("mapStage")?.addEventListener("click",e=>{
+    const h=e.target.closest(".hotspot");
+    if(!h) return;
+    setArea(h.dataset.area,true);
+  });
+
+  document.getElementById("areaSelectMobile")?.addEventListener("change",e=>{
+    setArea(e.target.value,false);
+  });
+
+  document.getElementById("areaPokemon")?.addEventListener("click",e=>{
+    const row=e.target.closest(".map-poke");
+    if(!row) return;
+    const id=Number(row.dataset.poke);
+    current().has(id)?current().delete(id):current().add(id);
+    save();
+    render();
+  });
+
+  load();
+  render();
+  renderMap();
+})();
