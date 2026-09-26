@@ -999,12 +999,8 @@
   }
 
   function renderTypePage(){
-    const select=document.getElementById("typeTargetSelect");
     const gridEl=document.getElementById("typeTargetGrid");
-    if(!select || !gridEl) return;
-
-    select.innerHTML=gen1Types.map(t=>`<option value="${t[0]}">${t[2]} ${t[1]}屬性</option>`).join("");
-    select.value=selectedGen1Type;
+    if(!gridEl) return;
 
     gridEl.innerHTML=gen1Types.map(t=>`
       <button type="button" class="type-target-btn ${t[0]===selectedGen1Type?"active":""}" data-type="${t[0]}">
@@ -1028,20 +1024,7 @@
     fill("typeX1",groups[1]);
     fill("typeX05",groups[0.5]);
     fill("typeX0",groups[0]);
-
-    const names=items=>items.length?items.map(k=>gen1TypeMeta[k][1]).join("、"):"無";
-    document.getElementById("typeSummary").innerHTML=
-      `我要攻擊 <b>${target[1]}屬性</b> 寶可夢：`+
-      `使用 <b>${names(groups[2])}</b> 會造成 <b>2 倍傷害</b>；`+
-      `使用 <b>${names(groups[1])}</b> 會造成 <b>一般傷害</b>；`+
-      `使用 <b>${names(groups[0.5])}</b> 只會造成 <b>0.5 倍傷害</b>；`+
-      `使用 <b>${names(groups[0])}</b> 則 <b>完全無效</b>。`;
   }
-
-  document.getElementById("typeTargetSelect")?.addEventListener("change",e=>{
-    selectedGen1Type=e.target.value;
-    renderTypePage();
-  });
 
   document.getElementById("typeTargetGrid")?.addEventListener("click",e=>{
     const btn=e.target.closest(".type-target-btn");
