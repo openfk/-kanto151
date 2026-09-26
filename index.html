@@ -77,7 +77,6 @@
   </div>
   </section>
 
-
   <section id="mapPage" class="page">
     <select id="areaSelectMobile" class="area-select-mobile" aria-label="選擇地區"></select>
     <div class="map-layout">
@@ -119,7 +118,6 @@
       </aside>
     </div>
   </section>
-
 
   <section id="typePage" class="page">
     <div class="type-panel">
@@ -226,9 +224,41 @@
 </div>
 
 <script>
+(async function bootLatestBuild(){
+  let latestVersion = null;
+
+  try{
+    const response = await fetch("version.json?t=" + Date.now(), {
+      cache: "no-store"
+    });
+    if(response.ok){
+      const data = await response.json();
+      if(data && typeof data.version === "string"){
+        latestVersion = data.version;
+      }
+    }
+  }catch(e){
+    // 離線或版本檔暫時讀不到時，仍讓網站正常啟動。
+  }
+
+  if(latestVersion){
+    const url = new URL(window.location.href);
+    if(url.searchParams.get("build") !== latestVersion){
+      url.searchParams.set("build", latestVersion);
+      window.location.replace(url.toString());
+      return;
+    }
+
+    const css = document.querySelector('link[rel="stylesheet"]');
+    if(css){
+      css.href = "style.css?v=" + encodeURIComponent(latestVersion);
+    }
+  }
+
   const script = document.createElement("script");
-  script.src = "app.js?v=" + Date.now();
+  script.src = "app.js?v=" + encodeURIComponent(latestVersion || Date.now());
   document.body.appendChild(script);
+})();
 </script>
 
   <footer class="legal-notice" aria-label="版權與資料來源聲明">
