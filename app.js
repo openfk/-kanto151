@@ -633,6 +633,7 @@
     document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===pageId));
     document.querySelectorAll(".main-tab").forEach(b=>b.classList.toggle("active",b.dataset.page===pageId));
     if(pageId==="mapPage") renderMap();
+    if(pageId==="typePage") renderTypePage();
   }
 
   function choiceBlocked(id){
@@ -938,7 +939,119 @@
     render();
   });
 
+
+  // ===== 第一世代屬性相剋 =====
+  const gen1Types=[
+    ["normal","一般","⬜","物理"],
+    ["fire","火","🔥","特殊"],
+    ["water","水","💧","特殊"],
+    ["electric","電","⚡","特殊"],
+    ["grass","草","🌿","特殊"],
+    ["ice","冰","❄️","特殊"],
+    ["fighting","格鬥","🥊","物理"],
+    ["poison","毒","☠️","物理"],
+    ["ground","地面","⛰️","物理"],
+    ["flying","飛行","🪽","物理"],
+    ["psychic","超能力","🔮","特殊"],
+    ["bug","蟲","🐛","物理"],
+    ["rock","岩石","🪨","物理"],
+    ["ghost","幽靈","👻","物理"],
+    ["dragon","龍","🐉","特殊"]
+  ];
+
+  const gen1TypeMeta=Object.fromEntries(gen1Types.map(t=>[t[0],t]));
+
+  // 第一世代實際遊戲相剋。未列出的組合皆為 ×1。
+  // 特別保留初代規則：蟲↔毒互剋、火不抗冰、幽靈→超能力實機為 ×0。
+  const gen1TypeChart={
+    normal:{rock:.5,ghost:0},
+    fire:{fire:.5,water:.5,grass:2,ice:2,bug:2,rock:.5,dragon:.5},
+    water:{fire:2,water:.5,grass:.5,ground:2,rock:2,dragon:.5},
+    electric:{water:2,electric:.5,grass:.5,ground:0,flying:2,dragon:.5},
+    grass:{fire:.5,water:2,grass:.5,poison:.5,ground:2,flying:.5,bug:.5,rock:2,dragon:.5},
+    ice:{water:.5,grass:2,ice:.5,ground:2,flying:2,dragon:2},
+    fighting:{normal:2,ice:2,poison:.5,flying:.5,psychic:.5,bug:.5,rock:2,ghost:0},
+    poison:{grass:2,poison:.5,ground:.5,bug:2,rock:.5,ghost:.5},
+    ground:{fire:2,electric:2,grass:.5,poison:2,flying:0,bug:.5,rock:2},
+    flying:{electric:.5,grass:2,fighting:2,bug:2,rock:.5},
+    psychic:{fighting:2,poison:2,psychic:.5},
+    bug:{fire:.5,grass:2,fighting:.5,poison:2,flying:.5,psychic:2,ghost:.5},
+    rock:{fire:2,ice:2,fighting:.5,ground:.5,flying:2,bug:2},
+    ghost:{normal:0,psychic:0,ghost:2},
+    dragon:{dragon:2}
+  };
+
+  let selectedGen1Type="fire";
+
+  function gen1Multiplier(attack,defense){
+    return gen1TypeChart[attack]?.[defense] ?? 1;
+  }
+
+  function gen1GroupsFor(defense){
+    const groups={2:[],1:[],0.5:[],0:[]};
+    gen1Types.forEach(t=>groups[gen1Multiplier(t[0],defense)].push(t[0]));
+    return groups;
+  }
+
+  function gen1Chip(key){
+    const t=gen1TypeMeta[key];
+    return `<span class="type-chip">${t[2]} ${t[1]}</span>`;
+  }
+
+  function renderTypePage(){
+    const select=document.getElementById("typeTargetSelect");
+    const gridEl=document.getElementById("typeTargetGrid");
+    if(!select || !gridEl) return;
+
+    select.innerHTML=gen1Types.map(t=>`<option value="${t[0]}">${t[2]} ${t[1]}屬性</option>`).join("");
+    select.value=selectedGen1Type;
+
+    gridEl.innerHTML=gen1Types.map(t=>`
+      <button type="button" class="type-target-btn ${t[0]===selectedGen1Type?"active":""}" data-type="${t[0]}">
+        <strong>${t[2]} ${t[1]}</strong>
+        <small>${t[3]}屬性</small>
+      </button>
+    `).join("");
+
+    const target=gen1TypeMeta[selectedGen1Type];
+    const groups=gen1GroupsFor(selectedGen1Type);
+
+    document.getElementById("typeTargetName").textContent=`${target[2]} ${target[1]}屬性寶可夢`;
+    document.getElementById("typeTargetClass").textContent=`此屬性招式在第一世代屬於：${target[3]}`;
+
+    const fill=(id,items)=>{
+      document.getElementById(id).innerHTML=items.length
+        ? items.map(gen1Chip).join("")
+        : '<span class="type-none">無</span>';
+    };
+    fill("typeX2",groups[2]);
+    fill("typeX1",groups[1]);
+    fill("typeX05",groups[0.5]);
+    fill("typeX0",groups[0]);
+
+    const names=items=>items.length?items.map(k=>gen1TypeMeta[k][1]).join("、"):"無";
+    document.getElementById("typeSummary").innerHTML=
+      `我要攻擊 <b>${target[1]}屬性</b> 寶可夢：`+
+      `使用 <b>${names(groups[2])}</b> 會造成 <b>2 倍傷害</b>；`+
+      `使用 <b>${names(groups[1])}</b> 會造成 <b>一般傷害</b>；`+
+      `使用 <b>${names(groups[0.5])}</b> 只會造成 <b>0.5 倍傷害</b>；`+
+      `使用 <b>${names(groups[0])}</b> 則 <b>完全無效</b>。`;
+  }
+
+  document.getElementById("typeTargetSelect")?.addEventListener("change",e=>{
+    selectedGen1Type=e.target.value;
+    renderTypePage();
+  });
+
+  document.getElementById("typeTargetGrid")?.addEventListener("click",e=>{
+    const btn=e.target.closest(".type-target-btn");
+    if(!btn) return;
+    selectedGen1Type=btn.dataset.type;
+    renderTypePage();
+  });
+
   load();
   render();
   renderMap();
+  renderTypePage();
 })();

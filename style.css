@@ -396,3 +396,213 @@
     }
 
 .legal-notice{max-width:1100px;margin:32px auto 20px;padding:18px 20px;border-top:1px solid rgba(127,127,127,.35);font-size:12px;line-height:1.7;opacity:.82;text-align:left}.legal-notice strong{opacity:1}
+
+
+/* ===== 第一世代屬性相剋 ===== */
+.type-panel{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+}
+.type-panel-head{
+  padding:16px;
+  border-bottom:1px solid var(--border);
+}
+.type-panel-head strong{
+  display:block;
+  font-size:20px;
+}
+.type-panel-head span{
+  display:block;
+  margin-top:5px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.55;
+}
+.type-panel-body{padding:16px}
+.type-prompt{
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+.type-target-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  font-size:18px;
+}
+.type-target-select{
+  min-width:220px;
+  padding:11px 12px;
+  color:var(--text);
+  background:#171a1d;
+  border:1px solid var(--border);
+  border-radius:11px;
+}
+.type-target-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:8px;
+  margin-top:14px;
+}
+.type-target-btn{
+  min-height:60px;
+  padding:10px 9px;
+  text-align:left;
+  background:#171a1d;
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+.type-target-btn strong{
+  display:block;
+  font-size:14px;
+}
+.type-target-btn small{
+  display:block;
+  margin-top:3px;
+  color:var(--muted);
+  font-size:11px;
+}
+.type-target-btn.active{
+  border-color:var(--accent);
+  background:var(--accent-bg);
+  box-shadow:0 0 0 2px rgba(127,179,255,.12) inset;
+}
+.type-current{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:14px;
+  padding:14px 15px;
+  background:#171a1d;
+  border:1px solid var(--border);
+  border-radius:13px;
+}
+.type-current div>span{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+}
+.type-current div>strong{
+  display:block;
+  margin-top:2px;
+  font-size:25px;
+}
+.type-current>span{
+  color:var(--muted);
+  font-size:12px;
+}
+.type-result-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin-top:14px;
+}
+.type-result{
+  padding:14px;
+  background:#171a1d;
+  border:1px solid var(--border);
+  border-radius:14px;
+}
+.type-result h3{
+  margin:0 0 8px;
+  font-size:14px;
+}
+.type-result h3 b{
+  margin-right:5px;
+  font-size:23px;
+}
+.type-result p{
+  margin:0 0 9px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+}
+.type-x2 h3 b{color:var(--ok)}
+.type-x1 h3 b{color:#d7dde4}
+.type-x05 h3 b{color:#e7b07d}
+.type-x0 h3 b{color:#8f98a2}
+.type-chips{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+.type-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:6px 9px;
+  background:#202428;
+  border:1px solid var(--border);
+  border-radius:999px;
+  font-size:12px;
+}
+.type-none{
+  color:var(--muted);
+  font-size:12px;
+}
+.type-summary{
+  margin-top:14px;
+  padding:13px 14px;
+  background:#15181b;
+  border:1px solid var(--border);
+  border-radius:12px;
+  font-size:13px;
+  line-height:1.7;
+}
+.type-info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:14px;
+}
+.type-info-card{
+  padding:15px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:16px;
+}
+.type-info-card h3{
+  margin:0 0 8px;
+  font-size:16px;
+}
+.type-info-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.65;
+}
+.type-rule{
+  margin-top:9px;
+  padding:10px 11px;
+  background:#171a1d;
+  border:1px solid var(--border);
+  border-radius:11px;
+}
+.type-rule strong{
+  display:block;
+  margin-bottom:3px;
+  font-size:13px;
+}
+.type-rule span{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.55;
+}
+.type-gen1-note{
+  background:#201e18;
+  border-color:#5b5238;
+}
+@media(max-width:760px){
+  .type-target-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .type-result-grid{grid-template-columns:1fr}
+  .type-info-grid{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .type-target-row{align-items:stretch}
+  .type-target-select{width:100%;min-width:0}
+}

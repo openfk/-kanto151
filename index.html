@@ -33,6 +33,7 @@
   <div class="main-tabs">
     <button class="main-tab active" data-page="dexPage">圖鑑</button>
     <button class="main-tab" data-page="mapPage">地圖攻略</button>
+    <button class="main-tab" data-page="typePage">屬性相剋</button>
   </div>
 
 <section id="dexPage" class="page active">
@@ -116,6 +117,102 @@
           <div id="areaPokemon" class="map-poke-list"></div>
         </div>
       </aside>
+    </div>
+  </section>
+
+
+  <section id="typePage" class="page">
+    <div class="type-panel">
+      <div class="type-panel-head">
+        <strong>第一世代屬性相剋</strong>
+        <span>選擇你要攻擊的寶可夢屬性，直接查看第一世代的弱點、一般傷害、減傷與無效屬性。</span>
+      </div>
+
+      <div class="type-panel-body">
+        <div class="type-prompt">我要攻擊</div>
+        <div class="type-target-row">
+          <select id="typeTargetSelect" class="type-target-select" aria-label="選擇對手屬性"></select>
+          <strong>寶可夢</strong>
+        </div>
+
+        <div id="typeTargetGrid" class="type-target-grid"></div>
+
+        <div class="type-current">
+          <div>
+            <span>目前目標</span>
+            <strong id="typeTargetName">火屬性寶可夢</strong>
+          </div>
+          <span id="typeTargetClass"></span>
+        </div>
+
+        <div class="type-result-grid">
+          <div class="type-result type-x2">
+            <h3><b>×2</b> 弱點</h3>
+            <p>使用這些屬性招式會造成 2 倍傷害。</p>
+            <div id="typeX2" class="type-chips"></div>
+          </div>
+          <div class="type-result type-x1">
+            <h3><b>×1</b> 一般傷害</h3>
+            <p>使用這些屬性招式會造成正常傷害。</p>
+            <div id="typeX1" class="type-chips"></div>
+          </div>
+          <div class="type-result type-x05">
+            <h3><b>×½</b> 減傷</h3>
+            <p>使用這些屬性招式只會造成一半傷害。</p>
+            <div id="typeX05" class="type-chips"></div>
+          </div>
+          <div class="type-result type-x0">
+            <h3><b>×0</b> 無效</h3>
+            <p>使用這些屬性招式完全無法造成傷害。</p>
+            <div id="typeX0" class="type-chips"></div>
+          </div>
+        </div>
+
+        <div id="typeSummary" class="type-summary"></div>
+      </div>
+    </div>
+
+    <div class="type-info-grid">
+      <section class="type-info-card">
+        <h3>第一世代的物理／特殊</h3>
+        <p>第一世代不是每一招自己決定物理或特殊，而是由招式的屬性決定。</p>
+        <div class="type-rule">
+          <strong>物理屬性</strong>
+          <span>一般、格鬥、飛行、毒、地面、岩石、蟲、幽靈</span>
+        </div>
+        <div class="type-rule">
+          <strong>特殊屬性</strong>
+          <span>火、水、草、電、超能力、冰、龍</span>
+        </div>
+        <div class="type-rule">
+          <strong>特殊能力值</strong>
+          <span>第一世代只有一個「特殊」能力值，尚未拆成後來的特攻與特防。</span>
+        </div>
+      </section>
+
+      <section class="type-info-card type-gen1-note">
+        <h3>第一世代特有差異</h3>
+        <div class="type-rule">
+          <strong>只有 15 種屬性</strong>
+          <span>第一世代還沒有惡、鋼、妖精。</span>
+        </div>
+        <div class="type-rule">
+          <strong>蟲 ↔ 毒互剋</strong>
+          <span>第一世代中，蟲打毒 ×2，毒打蟲也 ×2。</span>
+        </div>
+        <div class="type-rule">
+          <strong>火不抗冰</strong>
+          <span>冰屬性招式攻擊火屬性，在第一世代是 ×1。</span>
+        </div>
+        <div class="type-rule">
+          <strong>幽靈 → 超能力</strong>
+          <span>依第一世代實際遊戲判定，幽靈屬性招式對超能力屬性為 ×0。</span>
+        </div>
+      </section>
+    </div>
+
+    <div class="smallnote">
+      本頁採第一世代《赤／綠／青（日版）／皮卡丘》的實際屬性相剋規則，不混用後世代相剋表。
     </div>
   </section>
 
