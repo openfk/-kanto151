@@ -944,7 +944,12 @@
     {id:"forest",name:"常磐森林",x:19.6,y:34.2,targets:[10,11,12,13,14,15,25],note:"前期蟲系與皮卡丘的重要捕獲區。"},
     {id:"viridian",name:"常磐市",x:19.5,y:51.5,targets:[],note:"常磐市。"},
     {id:"pallet",name:"真新鎮",x:19.5,y:69.5,targets:[1,4,7],note:"遊戲起點。紅／綠／藍為初始三選一；黃版取得方式不同。"},
-    {id:"ceruleanCave",name:"華藍洞窟",x:53.0,y:9.5,targets:[132,150],note:"華藍市西北側、通關後可進入；包含超夢。"},
+    {id:"ceruleanCave",name:"華藍洞窟",x:53.0,y:9.5,targetsByVersion:{
+      red:[24,26,40,42,47,49,60,64,80,82,85,97,99,101,105,112,113,117,118,119,129,132,150],
+      green:[26,28,40,42,47,49,60,64,80,82,85,97,99,101,105,112,113,117,118,119,129,132,150],
+      blue:[20,26,28,35,40,42,47,49,60,64,78,80,82,85,97,99,101,105,112,113,117,118,119,129,132,150],
+      yellow:[28,42,44,47,49,60,70,75,108,111,112,113,118,119,129,132,150]
+    },note:"華藍市西北側、通關後可進入；包含洞窟野生遭遇、釣魚與最深處的超夢。"},
     {id:"cerulean",name:"華藍市",x:58.2,y:17.3,targets:[],note:"華藍市。"},
     {id:"celadon",name:"彩虹市",x:43.5,y:33.0,targets:[133,137],note:"伊布贈送與遊戲中心兌換等特殊取得。"},
     {id:"saffron",name:"金黃市",x:58.2,y:33.0,targets:[106,107,131],note:"格鬥道場二選一，以及西爾佛公司的拉普拉斯。"},
@@ -1019,6 +1024,11 @@
 
   function areaById(id){ return mapAreas.find(a=>a.id===id) || mapAreas[0]; }
 
+  function areaTargetsFor(area){
+    const raw = area.targetsByVersion?.[state.version] ?? area.targets ?? [];
+    return raw.filter(id=>!unavailable[state.version].has(id));
+  }
+
   function targetStatus(id){
     if(current().has(id)) return "caught";
     const a=acquire(id);
@@ -1064,11 +1074,12 @@
     renderRouteHotspots();
 
     mapAreas.forEach(area=>{
-      const statuses=area.targets.map(targetStatus);
-      const done=area.targets.length>0 && statuses.every(s=>s==="caught");
+      const targets=areaTargetsFor(area);
+      const statuses=targets.map(targetStatus);
+      const done=targets.length>0 && statuses.every(s=>s==="caught");
       const b=document.createElement("button");
       b.type="button";
-      b.className="hotspot"+(done?" done":"")+(area.targets.length===0?" empty-target":"")+(selectedRouteNo===null && selectedAreaId===area.id?" active":"");
+      b.className="hotspot"+(done?" done":"")+(targets.length===0?" empty-target":"")+(selectedRouteNo===null && selectedAreaId===area.id?" active":"");
       b.style.left=area.x+"%";
       b.style.top=area.y+"%";
       b.dataset.area=area.id;
@@ -1104,7 +1115,7 @@
     document.getElementById("areaTitle").textContent=area.name;
     document.getElementById("areaNote").textContent=area.note;
 
-    const areaTargets=area.targets.filter(id=>!unavailable[state.version].has(id));
+    const areaTargets=areaTargetsFor(area);
     const caughtCount=areaTargets.filter(id=>current().has(id)).length;
     document.getElementById("areaCaught").textContent=caughtCount;
     document.getElementById("areaTotal").textContent=areaTargets.length;
