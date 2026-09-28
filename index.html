@@ -30,11 +30,12 @@
   <div id="versionNote" class="version-note"></div>
   <div class="progress"><div id="bar"></div></div>
 
-  <div class="main-tabs">
-    <button class="main-tab active" data-page="dexPage">圖鑑</button>
-    <button class="main-tab" data-page="mapPage">地圖攻略</button>
-    <button class="main-tab" data-page="typePage">屬性相剋</button>
-  </div>
+  <nav class="side-nav" aria-label="主要功能">
+    <button class="main-tab active" data-page="dexPage" title="圖鑑"><span class="nav-icon">📖</span><span class="nav-label">圖鑑</span></button>
+    <button class="main-tab" data-page="mapPage" title="地圖攻略"><span class="nav-icon">🗺️</span><span class="nav-label">地圖攻略</span></button>
+    <button class="main-tab" data-page="typePage" title="屬性相剋"><span class="nav-icon">⚔️</span><span class="nav-label">屬性相剋</span></button>
+    <button class="main-tab" data-page="shopPage" title="商店"><span class="nav-icon">🛒</span><span class="nav-label">商店</span></button>
+  </nav>
 
 <section id="dexPage" class="page active">
   <div class="controls">
@@ -76,6 +77,7 @@
     捕獲紀錄會自動存於目前瀏覽器的 localStorage；如果你換瀏覽器或清除網站資料，請先用「匯出四色紀錄」備份。
   </div>
   </section>
+
 
   <section id="mapPage" class="page">
     <select id="areaSelectMobile" class="area-select-mobile" aria-label="選擇地區"></select>
@@ -120,71 +122,89 @@
   </section>
 
   <section id="typePage" class="page">
-    <div class="type-panel">
-      <div class="type-panel-head">
-        <strong>第一世代屬性相剋</strong>
-        <span>選擇你要攻擊的寶可夢屬性，直接查看第一世代的弱點、一般傷害、減傷與無效屬性。</span>
-      </div>
-
-      <div class="type-panel-body">
-        <div class="type-prompt">請選擇正在攻擊寶可夢的屬性</div>
-
-        <div id="typeTargetGrid" class="type-target-grid"></div>
-
-        <div class="type-current">
-          <div>
-            <span>目前目標</span>
-            <strong id="typeTargetName">火屬性寶可夢</strong>
-          </div>
-          <span id="typeTargetClass"></span>
-        </div>
-
-        <div class="type-result-grid">
-          <div class="type-result type-x2">
-            <h3><b>×2</b> 弱點</h3>
-            <p>使用這些屬性招式會造成 2 倍傷害。</p>
-            <div id="typeX2" class="type-chips"></div>
-          </div>
-          <div class="type-result type-x1">
-            <h3><b>×1</b> 一般傷害</h3>
-            <p>使用這些屬性招式會造成正常傷害。</p>
-            <div id="typeX1" class="type-chips"></div>
-          </div>
-          <div class="type-result type-x05">
-            <h3><b>×½</b> 減傷</h3>
-            <p>使用這些屬性招式只會造成一半傷害。</p>
-            <div id="typeX05" class="type-chips"></div>
-          </div>
-          <div class="type-result type-x0">
-            <h3><b>×0</b> 無效</h3>
-            <p>使用這些屬性招式完全無法造成傷害。</p>
-            <div id="typeX0" class="type-chips"></div>
-          </div>
-        </div>
-      </div>
+    <div class="page-note">
+      第一世代共有 15 種屬性。點選屬性後可直接切換「攻擊方／防守方」，不用硬背整張表。
     </div>
-
-    <div class="type-info-grid">
-      <section class="type-info-card">
-        <h3>第一世代的物理／特殊</h3>
-        <p>第一世代不是每一招自己決定物理或特殊，而是由招式的屬性決定。</p>
-        <div class="type-rule">
-          <strong>物理屬性</strong>
-          <span>一般、格鬥、飛行、毒、地面、岩石、蟲、幽靈</span>
+    <div class="chart-shell">
+      <section class="type-panel">
+        <div class="type-panel-head">
+          <h2>屬性相剋</h2>
+          <p>依第一世代實際相剋規則顯示，包含初代特有的蟲毒互剋與幽靈對超能力判定。</p>
         </div>
-        <div class="type-rule">
-          <strong>特殊屬性</strong>
-          <span>火、水、草、電、超能力、冰、龍</span>
-        </div>
-        <div class="type-rule">
-          <strong>特殊能力值</strong>
-          <span>第一世代只有一個「特殊」能力值，尚未拆成後來的特攻與特防。</span>
+        <div class="type-panel-body">
+          <div class="type-mode">
+            <button id="attackBtn" class="active" type="button">攻擊方</button>
+            <button id="defenseBtn" type="button">防守方</button>
+          </div>
+          <div id="typeGrid" class="type-grid"></div>
+          <div class="type-selection">
+            <div class="selection-top">
+              <div>
+                <div id="modeCaption" class="small">我用這個屬性攻擊</div>
+                <h3 id="selectedName">⚡ 電</h3>
+              </div>
+              <div id="classPill" class="class-pill">特殊屬性</div>
+            </div>
+            <div class="effect-grid">
+              <div class="effect-card good"><h4><span class="mult">×2</span><span id="goodTitle">效果絕佳</span></h4><div id="goodList" class="chips"></div></div>
+              <div class="effect-card bad"><h4><span class="mult">×½</span><span id="badTitle">效果不好</span></h4><div id="badList" class="chips"></div></div>
+              <div class="effect-card zero"><h4><span class="mult">×0</span><span id="zeroTitle">完全無效</span></h4><div id="zeroList" class="chips"></div></div>
+            </div>
+            <div id="typeSummary" class="mini-summary"></div>
+          </div>
         </div>
       </section>
+      <aside class="type-side">
+        <section class="type-info-card">
+          <h3>第一世代的物理／特殊</h3>
+          <p>初代不是每個招式各自決定物理或特殊，而是由招式屬性決定。</p>
+          <div class="rule-list">
+            <div class="rule physical"><strong>物理屬性</strong><span>一般、格鬥、飛行、毒、地面、岩石、蟲、幽靈</span></div>
+            <div class="rule special"><strong>特殊屬性</strong><span>火、水、草、電、超能力、冰、龍</span></div>
+          </div>
+        </section>
+        <section class="type-info-card warning">
+          <h3>初代特有差異</h3>
+          <div class="rule-list">
+            <div class="rule"><strong>只有 15 種屬性</strong><span>還沒有惡、鋼、妖精。</span></div>
+            <div class="rule"><strong>蟲 ↔ 毒互剋</strong><span>第一世代中，蟲打毒、毒打蟲都是 ×2。</span></div>
+            <div class="rule"><strong>火不抗冰</strong><span>冰屬性攻擊打火屬性在第一世代是 ×1。</span></div>
+            <div class="rule"><strong>幽靈打超能力</strong><span>第一世代實際遊戲判定會變成 ×0。</span></div>
+          </div>
+        </section>
+      </aside>
     </div>
+    <section class="full-table-wrap">
+      <div class="full-table-head"><div><strong>完整相剋矩陣</strong><div class="small">橫向是防守方，直向是攻擊方。</div></div><span>手機可左右滑動</span></div>
+      <div class="table-scroll"><table id="chartTable"></table></div>
+      <div class="type-legend"><span>×2：效果絕佳</span><span>×½：效果不好</span><span>×0：無效</span><span>×1：一般</span></div>
+    </section>
+  </section>
 
+  <section id="shopPage" class="page">
+    <div class="shop-hero">
+      <div>
+        <div class="shop-kicker">目前版本・<span id="shopVersionName"></span></div>
+        <h2>關都商店速查</h2>
+        <p>查每個城鎮賣什麼，也可以直接反查「這個道具要去哪裡買」。道具名稱提供中文／日文對照。</p>
+      </div>
+    </div>
+    <div class="shop-search-box">
+      <input id="shopSearch" type="search" placeholder="搜尋道具、日文、TM 編號，例如：葉之石、リーフのいし、TM32" autocomplete="off">
+      <div class="shop-quick-row" aria-label="快捷搜尋">
+        <button type="button" class="shop-quick" data-shop-query="精靈球">精靈球</button>
+        <button type="button" class="shop-quick" data-shop-query="傷藥">傷藥</button>
+        <button type="button" class="shop-quick" data-shop-query="離洞繩">離洞繩</button>
+        <button type="button" class="shop-quick" data-shop-query="葉之石">葉之石</button>
+        <button type="button" class="shop-quick" data-shop-query="技能機">技能機</button>
+        <button type="button" class="shop-quick" data-shop-query="噴霧">噴霧</button>
+      </div>
+      <div id="shopSearchSummary" class="shop-search-summary"></div>
+    </div>
+    <div id="shopGrid" class="shop-grid"></div>
+    <div id="shopEmpty" class="shop-empty">找不到符合條件的販售道具。</div>
     <div class="smallnote">
-      本頁採第一世代《赤／綠／青（日版）／皮卡丘》的實際屬性相剋規則，不混用後世代相剋表。
+      商店庫存依日版第一世代紅／綠／藍與皮卡丘版資料整理。常磐市初次進店需先完成大木博士包裹事件才會正式販售商品。
     </div>
   </section>
 

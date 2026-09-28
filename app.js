@@ -262,9 +262,12 @@
 
 
 
-  // 第一世代日版《赤／綠／青／皮卡丘》道路直接取得資料。
-  // 收錄：野生走路、衝浪、釣魚、固定遭遇、NPC 贈送／交換、購買。
-  // 不因為可進化而把進化型自動加入地圖；只有真的能在該地點直接取得才列入。
+  // 第一世代（日版赤・綠・青・皮卡丘）地圖直接取得資料。
+  // 僅收錄：野生遭遇、衝浪／釣魚、固定遭遇、贈送、購買、遊戲內交換。
+  // 不因「可由此區寶可夢進化」而額外加入進化型。
+  // 第一世代原版（日版紅／綠／青／皮卡丘）地圖直接取得資料。
+  // 只列「在該地點能直接取得」的寶可夢：野生遭遇、衝浪、釣魚、固定遭遇、贈送、遊戲內交換／購買。
+  // 不會因為某隻寶可夢能進化，就把其進化型自動塞進同一地點。
   const routeData={
     1:{red:[16,19],green:[16,19],blue:[16,19],yellow:[16,19]},
     2:{red:[13,16,19,122],green:[10,16,19,122],blue:[10,16,19,122],yellow:[16,19,29,32,122]},
@@ -345,7 +348,7 @@
         <img src="${imageUrl(id)}" alt="${p.zh}">
         <span class="mp-info">
           <span class="mp-name">No.${pad(id)} ${p.zh} <span class="jp">${p.jp}</span></span>
-          <span class="mp-method">${a[0]}・${a[1]}</span>
+          <span class="mp-method">此區可直接遭遇／取得</span>
         </span>
         <span class="mp-state">${stateText}</span>
       </button>`;
@@ -363,57 +366,27 @@
   ];
 
   const mapAreas=[
-    // 依照開哥在 IMG_0850.jpeg 上手寫標記重新定位；道路座標維持 v4 定稿。
+    // 座標維持既有定稿；資料改為第一世代原版各版本的「直接取得」清單。
     {id:"league",name:"石英聯盟",x:9.2,y:8.5,targets:[],note:"寶可夢聯盟／四天王所在地。"},
-    {id:"victory",name:"冠軍之路",x:9.2,y:26.0,targetsByVersion:{
-      red:[41,42,49,66,67,74,75,95,105,146],
-      green:[41,42,49,66,67,74,75,95,105,146],
-      blue:[41,42,49,66,67,74,75,95,105,146],
-      yellow:[41,42,67,74,75,95,146]
-    },note:"冠軍之路。僅列此版本在此可直接遭遇或取得的寶可夢，包含火焰鳥。"},
-    {id:"pewter",name:"尼比市",x:19.8,y:20.0,targets:[],note:"尼比市；往東接 3 號道路與月見山。"},
-    {id:"moon",name:"月見山",x:39.0,y:14.5,targetsByVersion:{
-      red:[35,41,46,74],
-      green:[35,41,46,74],
-      blue:[35,41,46,74],
-      yellow:[27,35,41,46,74]
-    },note:"月見山洞窟。化石是在這裡取得道具，但化石寶可夢要到紅蓮島研究所復原，因此不列入此地目標。"},
-    {id:"diglett",name:"地鼠洞穴",x:24.8,y:26.0,targets:[50,51],note:"地鼠與三地鼠的主要捕獲地點。"},
-    {id:"forest",name:"常磐森林",x:19.6,y:34.2,targetsByVersion:{
-      red:[10,11,13,14,25],
-      green:[10,11,13,14,25],
-      blue:[10,11,13,14,25],
-      yellow:[10,11,16,17]
-    },note:"常磐森林。只列第一世代此版本在森林中可直接遭遇的寶可夢，不把進化型自動加入。"},
-    {id:"viridian",name:"常磐市",x:19.5,y:51.5,targets:[],note:"常磐市。"},
-    {id:"pallet",name:"真新鎮",x:19.5,y:69.5,targets:[1,4,7],note:"遊戲起點。紅／綠／藍為初始三選一；黃版取得方式不同。"},
-    {id:"ceruleanCave",name:"華藍洞窟",x:53.0,y:9.5,targetsByVersion:{
-      red:[24,26,40,42,47,49,60,64,80,82,85,97,99,101,105,112,113,117,118,119,129,132,150],
-      green:[26,28,40,42,47,49,60,64,80,82,85,97,99,101,105,112,113,117,118,119,129,132,150],
-      blue:[20,26,28,35,40,42,47,49,60,64,78,80,82,85,97,99,101,105,112,113,117,118,119,129,132,150],
-      yellow:[28,42,44,47,49,60,70,75,108,111,112,113,118,119,129,132,150]
-    },note:"華藍市西北側、通關後可進入；包含洞窟野生遭遇、釣魚與最深處的超夢。"},
-    {id:"cerulean",name:"華藍市",x:58.2,y:17.3,targets:[],note:"華藍市。"},
-    {id:"celadon",name:"彩虹市",x:43.5,y:33.0,targets:[133,137],note:"伊布贈送與遊戲中心兌換等特殊取得。"},
-    {id:"saffron",name:"金黃市",x:58.2,y:33.0,targets:[106,107,131],note:"格鬥道場二選一，以及西爾佛公司的拉普拉斯。"},
-    {id:"lavender",name:"紫苑鎮／寶可夢塔",x:77.5,y:33.0,targets:[92,93,94,104,105],note:"幽靈系與卡拉卡拉線的重要區域。"},
-    {id:"rock",name:"岩山隧道",x:77.7,y:20.5,targetsByVersion:{
-      red:[41,66,74,95],
-      green:[41,66,74,95],
-      blue:[41,66,74,95,132],
-      yellow:[41,66,74,95]
-    },note:"岩山隧道。日版青另可直接遇到百變怪。"},
-    {id:"power",name:"無人發電廠",x:82.0,y:26.5,targetsByVersion:{
-      red:[25,81,82,100,101,125,145],
-      green:[25,26,81,82,100,101,145],
-      blue:[25,26,81,82,100,101,145],
-      yellow:[81,82,88,89,100,101,145]
-    },note:"無人發電廠。包含野生遭遇、偽裝成道具球的固定遭遇，以及閃電鳥。"},
-    {id:"vermilion",name:"枯葉市",x:58.2,y:58.0,targets:[83],note:"枯葉市；包含大蔥鴨的遊戲內交換等取得方式。"},
-    {id:"safari",name:"狩獵區",x:49.0,y:76.5,targets:[29,32,102,111,113,115,123,127,128,147],note:"位於淺紅市內／北側的大型捕獲區。"},
-    {id:"fuchsia",name:"淺紅市",x:49.0,y:84.0,targets:[],note:"淺紅市；狩獵區就在市區北側。"},
-    {id:"seafoam",name:"雙子島",x:33.0,y:94.0,targets:[54,55,79,80,86,87,90,91,98,99,116,117,120,121,144],note:"淺紅市與紅蓮島之間的雙子島；包含急凍鳥。"},
-    {id:"cinnabar",name:"紅蓮島",x:19.5,y:94.0,targets:[88,89,109,110,138,140,142],note:"紅蓮島；寶可夢屋與化石復原的重要據點。"}
+    {id:"victory",name:"冠軍之路",x:9.2,y:26.0,targetsByVersion:{red:[41,42,49,66,67,74,75,95,105,146],green:[41,42,49,66,67,74,75,95,105,146],blue:[41,42,49,66,67,74,75,95,105,146],yellow:[41,42,67,74,75,95,146]},note:"冠軍之路；只列原版可直接遭遇的寶可夢與固定的火焰鳥。"},
+    {id:"pewter",name:"尼比市",x:19.8,y:20.0,targets:[],note:"尼比市；不把取得的道具或日後可復原的化石直接算成這裡的寶可夢。"},
+    {id:"moon",name:"月見山",x:39.0,y:14.5,targetsByVersion:{red:[35,41,46,74],green:[35,41,46,74],blue:[35,41,46,74],yellow:[27,35,41,46,74]},note:"月見山；只列洞窟內直接可遭遇的寶可夢，化石寶可夢改列在紅蓮島復原處。"},
+    {id:"diglett",name:"地鼠洞穴",x:24.8,y:26.0,targetsByVersion:{red:[50,51],green:[50,51],blue:[50,51],yellow:[50,51]},note:"地鼠洞穴。"},
+    {id:"forest",name:"常磐森林",x:19.6,y:34.2,targetsByVersion:{red:[10,11,13,14,25],green:[10,11,13,14,25],blue:[10,11,13,14,25],yellow:[10,11,16,17]},note:"常磐森林；不把巴大蝶、大針蜂等進化結果自動算進來。黃版可直接遇到比比鳥。"},
+    {id:"viridian",name:"常磐市",x:19.5,y:51.5,targetsByVersion:{red:[60,72,118,129],green:[60,72,118,129],blue:[60,72,118,129],yellow:[60,118,129]},note:"常磐市水域可直接釣到／遇到的寶可夢。"},
+    {id:"pallet",name:"真新鎮",x:19.5,y:69.5,targetsByVersion:{red:[1,4,7,60,72,118,129],green:[1,4,7,60,72,118,129],blue:[1,4,7,60,72,118,129],yellow:[25,60,72,118,120,129]},note:"真新鎮；包含原版初始寶可夢與當地水域可直接取得的寶可夢。"},
+    {id:"ceruleanCave",name:"華藍洞窟",x:53.0,y:9.5,targetsByVersion:{red:[24,26,40,42,47,49,60,64,80,82,85,97,99,101,105,112,113,117,118,119,129,132,150],green:[26,28,40,42,47,49,60,64,80,82,85,97,99,101,105,112,113,117,118,119,129,132,150],blue:[20,26,28,35,40,42,47,49,60,64,78,80,82,85,97,99,101,105,112,113,117,118,119,129,132,150],yellow:[28,42,44,47,49,60,70,75,108,111,112,113,118,119,129,132,150]},note:"華藍洞窟；包含原版洞窟野生遭遇、釣魚與最深處的超夢。"},
+    {id:"cerulean",name:"華藍市",x:58.2,y:17.3,targetsByVersion:{red:[54,60,98,118,124,129],green:[54,60,98,118,124,129],blue:[54,60,94,98,118,129],yellow:[1,60,118,119,129]},note:"華藍市；包含釣魚、黃版妙蛙種子贈送，以及各版本的遊戲內交換。"},
+    {id:"celadon",name:"彩虹市",x:43.5,y:33.0,targetsByVersion:{red:[30,35,60,61,63,79,118,123,129,133,137,147],green:[33,35,60,61,63,79,118,127,129,133,137,147],blue:[25,36,60,61,63,79,116,118,129,133,137,148],yellow:[37,40,60,63,118,123,127,129,133,137]},note:"彩虹市；包含當地水域、伊布贈送與遊戲中心可直接兌換的寶可夢。"},
+    {id:"saffron",name:"金黃市",x:58.2,y:33.0,targetsByVersion:{red:[106,107,131],green:[106,107,131],blue:[106,107,131],yellow:[106,107,131]},note:"金黃市；格鬥道場二選一與西爾佛公司的拉普拉斯。"},
+    {id:"lavender",name:"紫苑鎮／寶可夢塔",x:77.5,y:33.0,targetsByVersion:{red:[92,93,104],green:[92,93,104],blue:[92,93,104],yellow:[92,93,104]},note:"寶可夢塔；只列可直接捕獲的鬼斯、鬼斯通與卡拉卡拉，不把進化型或不可捕獲的幽靈嘎啦嘎啦算進來。"},
+    {id:"rock",name:"岩山隧道",x:77.7,y:20.5,targetsByVersion:{red:[41,66,74,95],green:[41,66,74,95],blue:[41,66,74,95,132],yellow:[41,66,74,95]},note:"岩山隧道；依日版紅／綠／青／皮卡丘版分開。"},
+    {id:"power",name:"無人發電廠",x:82.0,y:26.5,targetsByVersion:{red:[25,81,82,100,101,125,145],green:[25,26,81,82,100,101,145],blue:[25,26,81,82,100,101,145],yellow:[81,82,88,89,100,101,145]},note:"無人發電廠；包含野生遭遇、偽裝成道具球的固定遭遇與閃電鳥。"},
+    {id:"vermilion",name:"枯葉市",x:58.2,y:58.0,targetsByVersion:{red:[60,83,90,98,118,129],green:[60,83,90,98,118,129],blue:[60,83,90,98,118,129],yellow:[7,60,72,90,116,118,120,129]},note:"枯葉市；包含當地釣魚、紅綠青的大蔥鴨交換，以及黃版傑尼龜贈送。"},
+    {id:"safari",name:"狩獵區",x:49.0,y:76.5,targetsByVersion:{red:[29,30,32,33,46,47,48,49,54,60,79,84,98,102,111,113,115,118,123,128,129,147],green:[29,30,32,33,46,47,48,49,54,60,79,84,98,102,111,113,115,118,127,128,129,147],blue:[29,30,32,33,46,47,48,49,54,60,79,84,98,102,108,111,113,118,123,127,129,147],yellow:[29,30,32,33,46,47,60,102,104,105,111,113,114,115,118,123,127,128,129,147,148]},note:"狩獵區；合併各區域的野生遭遇與釣魚，但不額外加入牠們的進化型。"},
+    {id:"fuchsia",name:"淺紅市",x:49.0,y:84.0,targetsByVersion:{red:[60,98,118,119,129],green:[60,98,118,119,129],blue:[60,98,118,119,129],yellow:[60,118,129,130]},note:"淺紅市本身的水域直接取得資料；狩獵區另列。"},
+    {id:"seafoam",name:"雙子島",x:33.0,y:94.0,targetsByVersion:{red:[41,42,54,55,60,79,80,86,87,90,116,117,118,120,129,144],green:[41,42,54,55,60,79,80,86,87,90,98,99,116,118,120,129,144],blue:[41,42,60,79,80,86,87,90,98,99,116,118,120,124,129,144],yellow:[41,42,60,72,79,80,86,87,98,99,118,120,129,144]},note:"雙子島；包含各樓層野生遭遇、水域、釣魚與固定的急凍鳥。"},
+    {id:"cinnabar",name:"紅蓮島",x:19.5,y:94.0,targetsByVersion:{red:[58,60,77,86,88,89,90,101,109,110,114,116,118,120,129,138,140,142],green:[37,60,77,86,88,89,90,101,109,110,114,116,118,120,126,129,138,140,142],blue:[58,60,76,77,79,88,89,90,98,109,110,116,118,120,129,138,140,142],yellow:[19,20,58,60,72,87,88,89,112,118,120,129,132,138,140,142]},note:"紅蓮島與寶可夢屋；包含野生／釣魚、研究所交換，以及實際在研究所復原取得的化石寶可夢。"}
   ];
 
   function load(){
@@ -608,7 +581,7 @@
           <img src="${imageUrl(id)}" alt="${p.zh}">
           <span class="mp-info">
             <span class="mp-name">No.${pad(id)} ${p.zh} <span class="jp">${p.jp}</span></span>
-            <span class="mp-method">${a[0]}・${a[1]}</span>
+            <span class="mp-method">此區可直接遭遇／取得</span>
           </span>
           <span class="mp-state">${stateText}</span>
         </button>`;
@@ -634,6 +607,212 @@
     document.querySelectorAll(".main-tab").forEach(b=>b.classList.toggle("active",b.dataset.page===pageId));
     if(pageId==="mapPage") renderMap();
     if(pageId==="typePage") renderTypePage();
+    if(pageId==="shopPage") renderShop();
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  // ===== 第一世代屬性相剋 =====
+  const gen1Types = [
+    ["normal","一般","⬜","物理"],["fighting","格鬥","🥊","物理"],["flying","飛行","🪽","物理"],
+    ["poison","毒","☠️","物理"],["ground","地面","⛰️","物理"],["rock","岩石","🪨","物理"],
+    ["bug","蟲","🐛","物理"],["ghost","幽靈","👻","物理"],["fire","火","🔥","特殊"],
+    ["water","水","💧","特殊"],["grass","草","🌿","特殊"],["electric","電","⚡","特殊"],
+    ["psychic","超能力","🔮","特殊"],["ice","冰","❄️","特殊"],["dragon","龍","🐉","特殊"]
+  ];
+  const gen1Chart = {
+    normal:{rock:.5,ghost:0},
+    fighting:{normal:2,flying:.5,poison:.5,rock:2,bug:.5,ghost:0,psychic:.5,ice:2},
+    flying:{fighting:2,bug:2,grass:2,rock:.5,electric:.5},
+    poison:{grass:2,bug:2,poison:.5,ground:.5,rock:.5,ghost:.5},
+    ground:{poison:2,rock:2,fire:2,electric:2,grass:.5,bug:.5,flying:0},
+    rock:{flying:2,bug:2,fire:2,ice:2,fighting:.5,ground:.5},
+    bug:{grass:2,psychic:2,poison:2,fighting:.5,flying:.5,ghost:.5,fire:.5},
+    ghost:{ghost:2,psychic:0,normal:0},
+    fire:{bug:2,grass:2,ice:2,fire:.5,water:.5,rock:.5,dragon:.5},
+    water:{ground:2,rock:2,fire:2,water:.5,grass:.5,dragon:.5},
+    grass:{ground:2,rock:2,water:2,flying:.5,poison:.5,bug:.5,fire:.5,grass:.5,dragon:.5},
+    electric:{flying:2,water:2,grass:.5,electric:.5,dragon:.5,ground:0},
+    psychic:{fighting:2,poison:2,psychic:.5},
+    ice:{flying:2,ground:2,grass:2,dragon:2,water:.5,ice:.5},
+    dragon:{dragon:2}
+  };
+  const gen1TypeMeta=Object.fromEntries(gen1Types.map(t=>[t[0],t]));
+  let selectedType="electric", typeMode="attack";
+  const typeVal=(a,d)=>gen1Chart[a]?.[d] ?? 1;
+  const typeChip=k=>`<span class="chip">${gen1TypeMeta[k][2]} ${gen1TypeMeta[k][1]}</span>`;
+  const typeTextList=arr=>arr.map(k=>gen1TypeMeta[k][1]).join("、") || "無";
+
+  function renderTypePage(){
+    const typeGrid=document.getElementById("typeGrid");
+    if(!typeGrid) return;
+    typeGrid.innerHTML=gen1Types.map(t=>`
+      <button type="button" class="type-btn ${t[0]===selectedType?"active":""}" data-type="${t[0]}">
+        <strong>${t[2]} ${t[1]}</strong><span>${t[3]}屬性</span>
+      </button>`).join("");
+    typeGrid.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+      selectedType=b.dataset.type;
+      renderTypePage();
+    }));
+
+    const t=gen1TypeMeta[selectedType];
+    document.getElementById("selectedName").textContent=`${t[2]} ${t[1]}`;
+    document.getElementById("classPill").textContent=`${t[3]}屬性`;
+    document.getElementById("modeCaption").textContent=typeMode==="attack"?"我用這個屬性攻擊":"這個屬性受到攻擊";
+    document.getElementById("attackBtn").classList.toggle("active",typeMode==="attack");
+    document.getElementById("defenseBtn").classList.toggle("active",typeMode==="defense");
+
+    const groups={2:[],0.5:[],0:[]};
+    for(const other of gen1Types){
+      const v=typeMode==="attack"?typeVal(selectedType,other[0]):typeVal(other[0],selectedType);
+      if(groups[v]) groups[v].push(other[0]);
+    }
+    document.getElementById("goodList").innerHTML=groups[2].length?groups[2].map(typeChip).join(""):'<span class="small">無</span>';
+    document.getElementById("badList").innerHTML=groups[0.5].length?groups[0.5].map(typeChip).join(""):'<span class="small">無</span>';
+    document.getElementById("zeroList").innerHTML=groups[0].length?groups[0].map(typeChip).join(""):'<span class="small">無</span>';
+    document.getElementById("goodTitle").textContent=typeMode==="attack"?"效果絕佳":"弱點";
+    document.getElementById("badTitle").textContent=typeMode==="attack"?"效果不好":"抗性";
+    document.getElementById("zeroTitle").textContent=typeMode==="attack"?"完全無效":"免疫";
+    document.getElementById("typeSummary").innerHTML=typeMode==="attack"
+      ? `用 <b>${t[1]}</b> 屬性進攻：×2 對 ${typeTextList(groups[2])}；×½ 對 ${typeTextList(groups[0.5])}；×0 對 ${typeTextList(groups[0])}。`
+      : `<b>${t[1]}</b> 屬性防守時：弱點是 ${typeTextList(groups[2])}；抗性是 ${typeTextList(groups[0.5])}；免疫 ${typeTextList(groups[0])}。`;
+
+    const table=document.getElementById("chartTable");
+    if(table){
+      const head=`<tr><th>攻↓ / 防→</th>${gen1Types.map(x=>`<th>${x[2]}<br>${x[1]}</th>`).join("")}</tr>`;
+      const rows=gen1Types.map(a=>{
+        const cells=gen1Types.map(d=>{
+          const v=typeVal(a[0],d[0]);
+          const cls=v===2?"x2":v===.5?"x05":v===0?"x0":"x1";
+          return `<td class="${cls}">${v===.5?"½":v}</td>`;
+        }).join("");
+        return `<tr><td>${a[2]} ${a[1]}</td>${cells}</tr>`;
+      }).join("");
+      table.innerHTML=head+rows;
+    }
+  }
+
+  // ===== 第一世代商店 =====
+  const shopItems={
+    pokeball:{zh:"精靈球",jp:"モンスターボール",price:200,tags:"球 捕獲"},
+    potion:{zh:"傷藥",jp:"キズぐすり",price:300,tags:"回復 hp"},
+    antidote:{zh:"解毒藥",jp:"どくけし",price:100,tags:"狀態 異常 中毒"},
+    parlyz:{zh:"解麻藥",jp:"まひなおし",price:200,tags:"狀態 異常 麻痺"},
+    burnheal:{zh:"灼傷藥",jp:"やけどなおし",price:250,tags:"狀態 異常 灼傷"},
+    escaperope:{zh:"離洞繩",jp:"あなぬけのヒモ",price:550,tags:"洞窟 脫離"},
+    awakening:{zh:"解眠藥",jp:"ねむけざまし",price:200,tags:"狀態 異常 睡眠"},
+    repel:{zh:"除蟲噴霧",jp:"むしよけスプレー",price:350,tags:"噴霧 避免 遭遇"},
+    superpotion:{zh:"好傷藥",jp:"いいキズぐすり",price:700,tags:"回復 hp"},
+    iceheal:{zh:"解凍藥",jp:"こおりなおし",price:250,tags:"狀態 異常 冰凍"},
+    greatball:{zh:"超級球",jp:"スーパーボール",price:600,tags:"球 捕獲"},
+    revive:{zh:"活力碎片",jp:"げんきのかけら",price:1500,tags:"回復 瀕死"},
+    superrepel:{zh:"白銀噴霧",jp:"シルバースプレー",price:500,tags:"噴霧 避免 遭遇"},
+    ultraball:{zh:"高級球",jp:"ハイパーボール",price:1200,tags:"球 捕獲"},
+    hyperpotion:{zh:"厲害傷藥",jp:"すごいキズぐすり",price:1500,tags:"回復 hp"},
+    fullheal:{zh:"萬靈藥",jp:"なんでもなおし",price:600,tags:"狀態 異常"},
+    maxrepel:{zh:"黃金噴霧",jp:"ゴールドスプレー",price:700,tags:"噴霧 避免 遭遇"},
+    fullrestore:{zh:"全復藥",jp:"かいふくのくすり",price:3000,tags:"回復 hp 狀態"},
+    maxpotion:{zh:"全滿藥",jp:"まんたんのくすり",price:2500,tags:"回復 hp"},
+    pokedoll:{zh:"皮皮玩偶",jp:"ピッピにんぎょう",price:1000,tags:"玩偶"},
+    firestone:{zh:"火之石",jp:"ほのおのいし",price:2100,tags:"進化石 石頭"},
+    thunderstone:{zh:"雷之石",jp:"かみなりのいし",price:2100,tags:"進化石 石頭"},
+    waterstone:{zh:"水之石",jp:"みずのいし",price:2100,tags:"進化石 石頭"},
+    leafstone:{zh:"葉之石",jp:"リーフのいし",price:2100,tags:"進化石 石頭"},
+    xaccuracy:{zh:"命中強化",jp:"ヨクアタール",price:950,tags:"戰鬥 道具 能力"},
+    guardspec:{zh:"能力防守",jp:"エフェクトガード",price:700,tags:"戰鬥 道具 能力"},
+    direhit:{zh:"要害攻擊",jp:"クリティカッター",price:650,tags:"戰鬥 道具 能力"},
+    xattack:{zh:"攻擊強化",jp:"プラスパワー",price:500,tags:"戰鬥 道具 能力"},
+    xdefend:{zh:"防禦強化",jp:"ディフェンダー",price:550,tags:"戰鬥 道具 能力"},
+    xspeed:{zh:"速度強化",jp:"スピーダー",price:350,tags:"戰鬥 道具 能力"},
+    xspecial:{zh:"特殊增強（初代）",jp:"スペシャルアップ",price:350,tags:"戰鬥 道具 能力 特殊"},
+    hpup:{zh:"HP增強劑",jp:"マックスアップ",price:9800,tags:"能力 藥 維他命"},
+    protein:{zh:"攻擊增強劑",jp:"タウリン",price:9800,tags:"能力 藥 維他命"},
+    iron:{zh:"防禦增強劑",jp:"ブロムヘキシン",price:9800,tags:"能力 藥 維他命"},
+    carbos:{zh:"速度增強劑",jp:"インドメタシン",price:9800,tags:"能力 藥 維他命"},
+    calcium:{zh:"特殊增強劑",jp:"リゾチウム",price:9800,tags:"能力 藥 維他命 特殊"},
+    freshwater:{zh:"美味之水",jp:"おいしいみず",price:200,tags:"飲料 回復"},
+    sodapop:{zh:"勁爽汽水",jp:"サイコソーダ",price:300,tags:"飲料 回復"},
+    lemonade:{zh:"果汁牛奶",jp:"ミックスオレ",price:350,tags:"飲料 回復"},
+    tm32:{zh:"TM32 影子分身",jp:"わざマシン32・かげぶんしん",price:1000,tags:"技能機 tm 招式"},
+    tm33:{zh:"TM33 反射壁",jp:"わざマシン33・リフレクター",price:1000,tags:"技能機 tm 招式"},
+    tm02:{zh:"TM02 旋風刀",jp:"わざマシン02・かまいたち",price:2000,tags:"技能機 tm 招式"},
+    tm07:{zh:"TM07 角鑽",jp:"わざマシン07・つのドリル",price:2000,tags:"技能機 tm 招式"},
+    tm37:{zh:"TM37 炸蛋",jp:"わざマシン37・タマゴばくだん",price:2000,tags:"技能機 tm 招式"},
+    tm01:{zh:"TM01 百萬噸重拳",jp:"わざマシン01・メガトンパンチ",price:3000,tags:"技能機 tm 招式"},
+    tm05:{zh:"TM05 百萬噸重踢",jp:"わざマシン05・メガトンキック",price:3000,tags:"技能機 tm 招式"},
+    tm09:{zh:"TM09 猛撞",jp:"わざマシン09・とっしん",price:3000,tags:"技能機 tm 招式"},
+    tm17:{zh:"TM17 地獄翻滾",jp:"わざマシン17・じごくぐるま",price:3000,tags:"技能機 tm 招式"}
+  };
+
+  const shopPlaces=[
+    {id:"viridian",zh:"常磐市",jp:"トキワシティ",note:"初次進店時需先完成大木博士包裹事件。",sections:[{name:"友好商店",items:["pokeball",{key:"potion",versions:["yellow"]},"antidote","parlyz","burnheal"]}]},
+    {id:"pewter",zh:"尼比市",jp:"ニビシティ",sections:[{name:"友好商店",items:["pokeball","potion","escaperope","antidote","burnheal","awakening","parlyz"]}]},
+    {id:"cerulean",zh:"華藍市",jp:"ハナダシティ",sections:[{name:"友好商店",items:["pokeball","potion",{key:"escaperope",versions:["yellow"]},"repel","antidote","burnheal","awakening","parlyz"]}]},
+    {id:"vermilion",zh:"枯葉市",jp:"クチバシティ",sections:[{name:"友好商店",items:["pokeball","superpotion","iceheal","awakening","parlyz","repel"]}]},
+    {id:"lavender",zh:"紫苑鎮",jp:"シオンタウン",sections:[{name:"友好商店",items:["greatball","superpotion","revive","escaperope","superrepel","antidote","burnheal","iceheal","parlyz"]}]},
+    {id:"celadon",zh:"彩虹市",jp:"タマムシシティ",note:"百貨公司分樓層販售，道具種類最多。",sections:[
+      {name:"百貨公司 2F・左櫃台",items:["greatball","superpotion","revive","superrepel","antidote","burnheal","iceheal","awakening","parlyz"]},
+      {name:"百貨公司 2F・右櫃台（技能機）",items:["tm32","tm33","tm02","tm07","tm37","tm01","tm05","tm09","tm17"]},
+      {name:"百貨公司 4F・進化石",items:["pokedoll","firestone","thunderstone","waterstone","leafstone"]},
+      {name:"百貨公司 5F・戰鬥道具",items:["xaccuracy","guardspec","direhit","xattack","xdefend","xspeed","xspecial"]},
+      {name:"百貨公司 5F・能力增強",items:["hpup","protein","iron","carbos","calcium"]},
+      {name:"百貨公司頂樓・販賣機",items:["freshwater","sodapop","lemonade"]}
+    ]},
+    {id:"fuchsia",zh:"淺紅市",jp:"セキチクシティ",sections:[{name:"友好商店",items:["ultraball","greatball",{key:"superpotion",exclude:["yellow"]},{key:"hyperpotion",versions:["yellow"]},"revive","fullheal","superrepel"]}]},
+    {id:"cinnabar",zh:"紅蓮島",jp:"グレンタウン",sections:[{name:"友好商店",items:["ultraball","greatball","hyperpotion","maxrepel","escaperope","fullheal","revive"]}]},
+    {id:"saffron",zh:"金黃市",jp:"ヤマブキシティ",sections:[{name:"友好商店",items:["greatball","hyperpotion","maxrepel","escaperope","fullheal","revive"]}]},
+    {id:"indigo",zh:"石英高原",jp:"セキエイこうげん",sections:[{name:"寶可夢聯盟商店",items:["ultraball","greatball","fullrestore","maxpotion","fullheal","revive","maxrepel"]}]}
+  ];
+
+  function shopEntryKey(entry){ return typeof entry==="string"?entry:entry.key; }
+  function shopEntryAvailable(entry){
+    if(typeof entry==="string") return true;
+    if(entry.versions && !entry.versions.includes(state.version)) return false;
+    if(entry.exclude && entry.exclude.includes(state.version)) return false;
+    return true;
+  }
+  function shopNorm(v){ return String(v??"").toLowerCase().replace(/[\s・･\-_/／()（）]/g,""); }
+  function shopItemMatches(key,item,q){
+    if(!q) return true;
+    const hay=shopNorm(`${key} ${item.zh} ${item.jp} ${item.tags||""}`);
+    return hay.includes(q);
+  }
+  function shopMoney(n){ return `¥${Number(n).toLocaleString("zh-TW")}`; }
+
+  function renderShop(){
+    const grid=document.getElementById("shopGrid");
+    const input=document.getElementById("shopSearch");
+    if(!grid || !input) return;
+    document.getElementById("shopVersionName").textContent=notes[state.version];
+    const q=shopNorm(input.value);
+    let matchedPlaces=0, matchedItems=0;
+    const cards=[];
+
+    for(const place of shopPlaces){
+      const sectionHtml=[];
+      for(const section of place.sections){
+        const rows=[];
+        for(const entry of section.items){
+          if(!shopEntryAvailable(entry)) continue;
+          const key=shopEntryKey(entry), item=shopItems[key];
+          if(!item || !shopItemMatches(key,item,q)) continue;
+          matchedItems++;
+          rows.push(`<div class="shop-item"><span class="shop-item-name"><strong>${item.zh}</strong><small>${item.jp}</small></span><span class="shop-price">${shopMoney(item.price)}</span></div>`);
+        }
+        if(rows.length) sectionHtml.push(`<section class="shop-section"><h3>${section.name}</h3><div class="shop-items">${rows.join("")}</div></section>`);
+      }
+      if(sectionHtml.length){
+        matchedPlaces++;
+        cards.push(`<article class="shop-card"><div class="shop-card-head"><div><strong>${place.zh}</strong><span>${place.jp}</span></div>${place.note?`<p>${place.note}</p>`:""}</div>${sectionHtml.join("")}</article>`);
+      }
+    }
+    grid.innerHTML=cards.join("");
+    document.getElementById("shopEmpty").classList.toggle("show",cards.length===0);
+    const summary=document.getElementById("shopSearchSummary");
+    if(q){
+      summary.textContent=cards.length?`找到 ${matchedItems} 個販售項目，分布在 ${matchedPlaces} 個地點。`:`沒有找到符合「${input.value.trim()}」的販售項目。`;
+    }else{
+      summary.textContent=`顯示 ${matchedPlaces} 個商店地點。輸入道具名稱可直接反查。`;
+    }
   }
 
   function choiceBlocked(id){
@@ -729,6 +908,8 @@
     updateHeader();
     buildGuide();
     if(activePage==="mapPage") renderMap();
+    if(activePage==="typePage") renderTypePage();
+    if(activePage==="shopPage") renderShop();
     document.getElementById("imageError").classList.remove("show");
     const q=search.value.trim().toLowerCase();
     grid.innerHTML="";
@@ -916,6 +1097,16 @@
   });
 
 
+  document.getElementById("attackBtn")?.addEventListener("click",()=>{typeMode="attack";renderTypePage();});
+  document.getElementById("defenseBtn")?.addEventListener("click",()=>{typeMode="defense";renderTypePage();});
+  document.getElementById("shopSearch")?.addEventListener("input",renderShop);
+  document.querySelectorAll(".shop-quick").forEach(b=>b.addEventListener("click",()=>{
+    const input=document.getElementById("shopSearch");
+    input.value=b.dataset.shopQuery||"";
+    renderShop();
+    input.focus();
+  }));
+
   document.querySelectorAll(".main-tab").forEach(b=>{
     b.addEventListener("click",()=>setPage(b.dataset.page));
   });
@@ -939,102 +1130,7 @@
     render();
   });
 
-
-  // ===== 第一世代屬性相剋 =====
-  const gen1Types=[
-    ["normal","一般","⬜","物理"],
-    ["fire","火","🔥","特殊"],
-    ["water","水","💧","特殊"],
-    ["electric","電","⚡","特殊"],
-    ["grass","草","🌿","特殊"],
-    ["ice","冰","❄️","特殊"],
-    ["fighting","格鬥","🥊","物理"],
-    ["poison","毒","☠️","物理"],
-    ["ground","地面","⛰️","物理"],
-    ["flying","飛行","🪽","物理"],
-    ["psychic","超能力","🔮","特殊"],
-    ["bug","蟲","🐛","物理"],
-    ["rock","岩石","🪨","物理"],
-    ["ghost","幽靈","👻","物理"],
-    ["dragon","龍","🐉","特殊"]
-  ];
-
-  const gen1TypeMeta=Object.fromEntries(gen1Types.map(t=>[t[0],t]));
-
-  // 第一世代實際遊戲相剋。未列出的組合皆為 ×1。
-  // 特別保留初代規則：蟲↔毒互剋、火不抗冰、幽靈→超能力實機為 ×0。
-  const gen1TypeChart={
-    normal:{rock:.5,ghost:0},
-    fire:{fire:.5,water:.5,grass:2,ice:2,bug:2,rock:.5,dragon:.5},
-    water:{fire:2,water:.5,grass:.5,ground:2,rock:2,dragon:.5},
-    electric:{water:2,electric:.5,grass:.5,ground:0,flying:2,dragon:.5},
-    grass:{fire:.5,water:2,grass:.5,poison:.5,ground:2,flying:.5,bug:.5,rock:2,dragon:.5},
-    ice:{water:.5,grass:2,ice:.5,ground:2,flying:2,dragon:2},
-    fighting:{normal:2,ice:2,poison:.5,flying:.5,psychic:.5,bug:.5,rock:2,ghost:0},
-    poison:{grass:2,poison:.5,ground:.5,bug:2,rock:.5,ghost:.5},
-    ground:{fire:2,electric:2,grass:.5,poison:2,flying:0,bug:.5,rock:2},
-    flying:{electric:.5,grass:2,fighting:2,bug:2,rock:.5},
-    psychic:{fighting:2,poison:2,psychic:.5},
-    bug:{fire:.5,grass:2,fighting:.5,poison:2,flying:.5,psychic:2,ghost:.5},
-    rock:{fire:2,ice:2,fighting:.5,ground:.5,flying:2,bug:2},
-    ghost:{normal:0,psychic:0,ghost:2},
-    dragon:{dragon:2}
-  };
-
-  let selectedGen1Type="fire";
-
-  function gen1Multiplier(attack,defense){
-    return gen1TypeChart[attack]?.[defense] ?? 1;
-  }
-
-  function gen1GroupsFor(defense){
-    const groups={2:[],1:[],0.5:[],0:[]};
-    gen1Types.forEach(t=>groups[gen1Multiplier(t[0],defense)].push(t[0]));
-    return groups;
-  }
-
-  function gen1Chip(key){
-    const t=gen1TypeMeta[key];
-    return `<span class="type-chip">${t[2]} ${t[1]}</span>`;
-  }
-
-  function renderTypePage(){
-    const gridEl=document.getElementById("typeTargetGrid");
-    if(!gridEl) return;
-
-    gridEl.innerHTML=gen1Types.map(t=>`
-      <button type="button" class="type-target-btn ${t[0]===selectedGen1Type?"active":""}" data-type="${t[0]}">
-        <strong>${t[2]} ${t[1]}</strong>
-        <small>${t[3]}屬性</small>
-      </button>
-    `).join("");
-
-    const target=gen1TypeMeta[selectedGen1Type];
-    const groups=gen1GroupsFor(selectedGen1Type);
-
-    document.getElementById("typeTargetName").textContent=`${target[2]} ${target[1]}屬性寶可夢`;
-    document.getElementById("typeTargetClass").textContent=`此屬性招式在第一世代屬於：${target[3]}`;
-
-    const fill=(id,items)=>{
-      document.getElementById(id).innerHTML=items.length
-        ? items.map(gen1Chip).join("")
-        : '<span class="type-none">無</span>';
-    };
-    fill("typeX2",groups[2]);
-    fill("typeX1",groups[1]);
-    fill("typeX05",groups[0.5]);
-    fill("typeX0",groups[0]);
-  }
-
-  document.getElementById("typeTargetGrid")?.addEventListener("click",e=>{
-    const btn=e.target.closest(".type-target-btn");
-    if(!btn) return;
-    selectedGen1Type=btn.dataset.type;
-    renderTypePage();
-  });
-
   load();
   render();
   renderMap();
-  renderTypePage();
 })();
