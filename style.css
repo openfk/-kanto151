@@ -429,7 +429,7 @@ body{padding-right:104px}
 .type-panel-head h2{margin:0;font-size:20px}
 .type-panel-head p{margin:5px 0 0;color:var(--muted);font-size:13px;line-height:1.55}
 .type-panel-body{padding:16px}
-.type-mode{display:grid;grid-template-columns:1fr 1fr;padding:4px;background:#15181b;border:1px solid var(--border);border-radius:12px;margin-bottom:14px}
+.type-mode{display:grid;grid-template-columns:1fr;padding:4px;background:#15181b;border:1px solid var(--border);border-radius:12px;margin-bottom:14px}
 .type-mode button{border:0;border-radius:9px;color:var(--muted)}
 .type-mode button.active{background:var(--accent-bg);color:var(--text);font-weight:800}
 .type-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}

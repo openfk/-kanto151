@@ -389,6 +389,27 @@
     {id:"cinnabar",name:"紅蓮島",x:19.5,y:94.0,targetsByVersion:{red:[58,60,77,86,88,89,90,101,109,110,114,116,118,120,129,138,140,142],green:[37,60,77,86,88,89,90,101,109,110,114,116,118,120,126,129,138,140,142],blue:[58,60,76,77,79,88,89,90,98,109,110,116,118,120,129,138,140,142],yellow:[19,20,58,60,72,87,88,89,112,118,120,129,132,138,140,142]},note:"紅蓮島與寶可夢屋；包含野生／釣魚、研究所交換，以及實際在研究所復原取得的化石寶可夢。"}
   ];
 
+  // 依地圖資料反查目前版本的直接取得地點，讓「只看未捕獲」與地圖攻略共用同一份資料來源。
+  function directLocations(id){
+    const places=[];
+    for(const [routeNo,versions] of Object.entries(routeData)){
+      if((versions?.[state.version]||[]).includes(id)) places.push(`${routeNo}號道路`);
+    }
+    for(const area of mapAreas){
+      const targets=area.targetsByVersion?.[state.version] ?? area.targets ?? [];
+      if(targets.includes(id)) places.push(area.name);
+    }
+    return [...new Set(places)];
+  }
+
+  function dexAcquire(id){
+    const locations=directLocations(id);
+    if(locations.length){
+      return ["取得地點", locations.join("、")];
+    }
+    return acquire(id);
+  }
+
   function load(){
     try{
       const data=JSON.parse(localStorage.getItem(STORAGE)||"{}");
@@ -657,24 +678,21 @@
     const t=gen1TypeMeta[selectedType];
     document.getElementById("selectedName").textContent=`${t[2]} ${t[1]}`;
     document.getElementById("classPill").textContent=`${t[3]}屬性`;
-    document.getElementById("modeCaption").textContent=typeMode==="attack"?"我用這個屬性攻擊":"這個屬性受到攻擊";
-    document.getElementById("attackBtn").classList.toggle("active",typeMode==="attack");
-    document.getElementById("defenseBtn").classList.toggle("active",typeMode==="defense");
+    document.getElementById("modeCaption").textContent="我用這個屬性攻擊";
+    document.getElementById("attackBtn").classList.add("active");
 
     const groups={2:[],0.5:[],0:[]};
     for(const other of gen1Types){
-      const v=typeMode==="attack"?typeVal(selectedType,other[0]):typeVal(other[0],selectedType);
+      const v=typeVal(selectedType,other[0]);
       if(groups[v]) groups[v].push(other[0]);
     }
     document.getElementById("goodList").innerHTML=groups[2].length?groups[2].map(typeChip).join(""):'<span class="small">無</span>';
     document.getElementById("badList").innerHTML=groups[0.5].length?groups[0.5].map(typeChip).join(""):'<span class="small">無</span>';
     document.getElementById("zeroList").innerHTML=groups[0].length?groups[0].map(typeChip).join(""):'<span class="small">無</span>';
-    document.getElementById("goodTitle").textContent=typeMode==="attack"?"效果絕佳":"弱點";
-    document.getElementById("badTitle").textContent=typeMode==="attack"?"效果不好":"抗性";
-    document.getElementById("zeroTitle").textContent=typeMode==="attack"?"完全無效":"免疫";
-    document.getElementById("typeSummary").innerHTML=typeMode==="attack"
-      ? `用 <b>${t[1]}</b> 屬性進攻：×2 對 ${typeTextList(groups[2])}；×½ 對 ${typeTextList(groups[0.5])}；×0 對 ${typeTextList(groups[0])}。`
-      : `<b>${t[1]}</b> 屬性防守時：弱點是 ${typeTextList(groups[2])}；抗性是 ${typeTextList(groups[0.5])}；免疫 ${typeTextList(groups[0])}。`;
+    document.getElementById("goodTitle").textContent="效果絕佳";
+    document.getElementById("badTitle").textContent="效果不好";
+    document.getElementById("zeroTitle").textContent="完全無效";
+    document.getElementById("typeSummary").innerHTML=`用 <b>${t[1]}</b> 屬性進攻：×2 對 ${typeTextList(groups[2])}；×½ 對 ${typeTextList(groups[0.5])}；×0 對 ${typeTextList(groups[0])}。`;
 
     const table=document.getElementById("chartTable");
     if(table){
@@ -921,7 +939,7 @@
       if(q && !p.zh.toLowerCase().includes(q) && !p.jp.toLowerCase().includes(q) && !pad(p.id).includes(q) && String(p.id)!==q) return;
 
       shown++;
-      const m=acquire(p.id);
+      const m=dexAcquire(p.id);
       const b=document.createElement("button");
       b.type="button";
       b.className=`card ${got?"caught":"uncaught"}`;
@@ -1098,7 +1116,6 @@
 
 
   document.getElementById("attackBtn")?.addEventListener("click",()=>{typeMode="attack";renderTypePage();});
-  document.getElementById("defenseBtn")?.addEventListener("click",()=>{typeMode="defense";renderTypePage();});
   document.getElementById("shopSearch")?.addEventListener("input",renderShop);
   document.querySelectorAll(".shop-quick").forEach(b=>b.addEventListener("click",()=>{
     const input=document.getElementById("shopSearch");
