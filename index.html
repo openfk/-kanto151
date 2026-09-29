@@ -123,29 +123,31 @@
 
   <section id="typePage" class="page">
     <div class="page-note">
-      第一世代共有 15 種屬性。點選攻擊屬性即可快速查看效果絕佳、效果不好與無效的對象。
+      第一世代共有 15 種屬性。選擇你正在對付的寶可夢屬性，最多可選 2 種，直接查看牠害怕哪些屬性招式。
     </div>
     <div class="chart-shell">
       <section class="type-panel">
         <div class="type-panel-head">
           <h2>屬性相剋</h2>
-          <p>依第一世代實際相剋規則顯示，包含初代特有的蟲毒互剋與幽靈對超能力判定。</p>
+          <p>先選對手的第一屬性，再點第二屬性即可計算雙屬性。依第一世代實際相剋規則計算，包含蟲毒互剋與幽靈對超能力的初代判定。</p>
         </div>
         <div class="type-panel-body">
-          <div class="type-mode"><button id="attackBtn" class="active" type="button">攻擊方</button></div>
+          <div class="type-pick-hint">點選對手屬性；已選 2 種時，再點其他屬性會替換第二屬性。點已選屬性可取消第二屬性。</div>
           <div id="typeGrid" class="type-grid"></div>
           <div class="type-selection">
             <div class="selection-top">
               <div>
-                <div id="modeCaption" class="small">我用這個屬性攻擊</div>
+                <div id="modeCaption" class="small">正在攻擊的寶可夢屬性</div>
                 <h3 id="selectedName">⚡ 電</h3>
               </div>
-              <div id="classPill" class="class-pill">特殊屬性</div>
+              <div id="classPill" class="class-pill">單屬性</div>
             </div>
             <div class="effect-grid">
-              <div class="effect-card good"><h4><span class="mult">×2</span><span id="goodTitle">效果絕佳</span></h4><div id="goodList" class="chips"></div></div>
-              <div class="effect-card bad"><h4><span class="mult">×½</span><span id="badTitle">效果不好</span></h4><div id="badList" class="chips"></div></div>
-              <div class="effect-card zero"><h4><span class="mult">×0</span><span id="zeroTitle">完全無效</span></h4><div id="zeroList" class="chips"></div></div>
+              <div class="effect-card great"><h4><span class="mult">×4</span><span>效果絕佳</span></h4><div id="greatList" class="chips"></div></div>
+              <div class="effect-card good"><h4><span class="mult">×2</span><span>效果絕佳</span></h4><div id="goodList" class="chips"></div></div>
+              <div class="effect-card bad"><h4><span class="mult">×½</span><span>效果不好</span></h4><div id="badList" class="chips"></div></div>
+              <div class="effect-card very-bad"><h4><span class="mult">×¼</span><span>效果不好</span></h4><div id="veryBadList" class="chips"></div></div>
+              <div class="effect-card zero"><h4><span class="mult">×0</span><span>完全無效</span></h4><div id="zeroList" class="chips"></div></div>
             </div>
             <div id="typeSummary" class="mini-summary"></div>
           </div>

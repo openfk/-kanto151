@@ -658,41 +658,67 @@
     dragon:{dragon:2}
   };
   const gen1TypeMeta=Object.fromEntries(gen1Types.map(t=>[t[0],t]));
-  let selectedType="electric", typeMode="attack";
+  let selectedDefTypes=["electric"];
   const typeVal=(a,d)=>gen1Chart[a]?.[d] ?? 1;
   const typeChip=k=>`<span class="chip">${gen1TypeMeta[k][2]} ${gen1TypeMeta[k][1]}</span>`;
   const typeTextList=arr=>arr.map(k=>gen1TypeMeta[k][1]).join("、") || "無";
+  const effectivenessAgainst=(attackType,defTypes)=>defTypes.reduce((v,defType)=>v*typeVal(attackType,defType),1);
+
+  function selectDefType(type){
+    const i=selectedDefTypes.indexOf(type);
+    if(i>=0){
+      if(selectedDefTypes.length===2) selectedDefTypes.splice(i,1);
+      return;
+    }
+    if(selectedDefTypes.length===1) selectedDefTypes.push(type);
+    else selectedDefTypes[1]=type;
+  }
 
   function renderTypePage(){
     const typeGrid=document.getElementById("typeGrid");
     if(!typeGrid) return;
-    typeGrid.innerHTML=gen1Types.map(t=>`
-      <button type="button" class="type-btn ${t[0]===selectedType?"active":""}" data-type="${t[0]}">
-        <strong>${t[2]} ${t[1]}</strong><span>${t[3]}屬性</span>
-      </button>`).join("");
+    typeGrid.innerHTML=gen1Types.map(t=>{
+      const i=selectedDefTypes.indexOf(t[0]);
+      const active=i>=0?` active selected-${i+1}`:"";
+      const slot=i===0?"第一屬性":i===1?"第二屬性":`${t[3]}屬性`;
+      return `
+        <button type="button" class="type-btn${active}" data-type="${t[0]}">
+          <strong>${t[2]} ${t[1]}</strong><span>${slot}</span>
+        </button>`;
+    }).join("");
     typeGrid.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
-      selectedType=b.dataset.type;
+      selectDefType(b.dataset.type);
       renderTypePage();
     }));
 
-    const t=gen1TypeMeta[selectedType];
-    document.getElementById("selectedName").textContent=`${t[2]} ${t[1]}`;
-    document.getElementById("classPill").textContent=`${t[3]}屬性`;
-    document.getElementById("modeCaption").textContent="我用這個屬性攻擊";
-    document.getElementById("attackBtn").classList.add("active");
+    const selectedMeta=selectedDefTypes.map(k=>gen1TypeMeta[k]);
+    document.getElementById("selectedName").textContent=selectedMeta.map(t=>`${t[2]} ${t[1]}`).join(" ＋ ");
+    document.getElementById("classPill").textContent=selectedDefTypes.length===2?"雙屬性":"單屬性";
+    document.getElementById("modeCaption").textContent="正在攻擊的寶可夢屬性";
 
-    const groups={2:[],0.5:[],0:[]};
-    for(const other of gen1Types){
-      const v=typeVal(selectedType,other[0]);
-      if(groups[v]) groups[v].push(other[0]);
+    const groups={4:[],2:[],0.5:[],0.25:[],0:[]};
+    for(const attack of gen1Types){
+      const v=effectivenessAgainst(attack[0],selectedDefTypes);
+      if(groups[v]) groups[v].push(attack[0]);
     }
-    document.getElementById("goodList").innerHTML=groups[2].length?groups[2].map(typeChip).join(""):'<span class="small">無</span>';
-    document.getElementById("badList").innerHTML=groups[0.5].length?groups[0.5].map(typeChip).join(""):'<span class="small">無</span>';
-    document.getElementById("zeroList").innerHTML=groups[0].length?groups[0].map(typeChip).join(""):'<span class="small">無</span>';
-    document.getElementById("goodTitle").textContent="效果絕佳";
-    document.getElementById("badTitle").textContent="效果不好";
-    document.getElementById("zeroTitle").textContent="完全無效";
-    document.getElementById("typeSummary").innerHTML=`用 <b>${t[1]}</b> 屬性進攻：×2 對 ${typeTextList(groups[2])}；×½ 對 ${typeTextList(groups[0.5])}；×0 對 ${typeTextList(groups[0])}。`;
+    const fill=(id,arr)=>{
+      document.getElementById(id).innerHTML=arr.length?arr.map(typeChip).join(""):'<span class="small">無</span>';
+    };
+    fill("greatList",groups[4]);
+    fill("goodList",groups[2]);
+    fill("badList",groups[0.5]);
+    fill("veryBadList",groups[0.25]);
+    fill("zeroList",groups[0]);
+
+    const defenderName=selectedMeta.map(t=>t[1]).join("＋");
+    const weaknessParts=[];
+    if(groups[4].length) weaknessParts.push(`×4：${typeTextList(groups[4])}`);
+    if(groups[2].length) weaknessParts.push(`×2：${typeTextList(groups[2])}`);
+    const resistParts=[];
+    if(groups[0.5].length) resistParts.push(`×½：${typeTextList(groups[0.5])}`);
+    if(groups[0.25].length) resistParts.push(`×¼：${typeTextList(groups[0.25])}`);
+    if(groups[0].length) resistParts.push(`×0：${typeTextList(groups[0])}`);
+    document.getElementById("typeSummary").innerHTML=`對手是 <b>${defenderName}</b>：害怕 ${weaknessParts.join("；") || "沒有弱點"}。${resistParts.length?` 抗性／無效：${resistParts.join("；")}。`:""}`;
   }
 
   // ===== 第一世代商店 =====
@@ -1101,7 +1127,6 @@
   });
 
 
-  document.getElementById("attackBtn")?.addEventListener("click",()=>{typeMode="attack";renderTypePage();});
   document.getElementById("shopSearch")?.addEventListener("input",renderShop);
   document.querySelectorAll(".shop-quick").forEach(b=>b.addEventListener("click",()=>{
     const input=document.getElementById("shopSearch");
