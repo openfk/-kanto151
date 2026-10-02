@@ -363,7 +363,7 @@
         <img src="${imageUrl(id)}" alt="${p.zh}">
         <span class="mp-info">
           <span class="mp-name">No.${pad(id)} ${p.zh} <span class="jp">${p.jp}</span></span>
-          <span class="mp-method">此區可直接遭遇／取得</span>
+          <span class="mp-method">${mapAcquireText(id,title)}</span>
         </span>
         <span class="mp-state">${stateText}</span>
       </button>`;
@@ -462,6 +462,50 @@
     }
 
     return {options,covered};
+  }
+
+
+  // 地圖攻略中的取得方式要顯示「這個地點實際怎麼拿」，
+  // 不能只寫成泛用的「此區可直接遭遇／取得」。
+  function mapAcquireText(id, place){
+    const base=acquire(id);
+
+    // 已整理過的特殊取得，依目前正在看的地點顯示對應方式。
+    if(place==="狩獵地帶" && id===147){
+      return "釣魚｜使用超級釣竿";
+    }
+    if(place==="狩獵地帶" && id===148 && state.version==="yellow"){
+      return "釣魚｜使用超級釣竿";
+    }
+    if(place==="玉虹市"){
+      const coins=gameCornerPrizes[state.version]?.[id];
+      if(coins){
+        return `兌換｜遊戲城獎品兌換（${coins.toLocaleString("zh-TW")} 枚代幣）`;
+      }
+    }
+    if(place==="2號道路" && id===122){
+      const wanted=state.version==="blue"
+        ? "胖丁（プリン）"
+        : state.version==="yellow"
+          ? "皮皮（ピッピ）"
+          : "凱西（ケーシィ）";
+      return `NPC交換｜民宅 NPC，以${wanted}交換取得`;
+    }
+    if(place==="枯葉市" && id===83 && state.version!=="yellow"){
+      const wanted=state.version==="blue" ? "波波（ポッポ）" : "烈雀（オニスズメ）";
+      return `NPC交換｜民宅 NPC，以${wanted}交換取得`;
+    }
+
+    // 其他已知的特殊取得方式，也直接放進地圖卡片。
+    const usefulMethods=new Set([
+      "釣魚","衝浪","釣魚／野外","固定遭遇","贈送","NPC交換",
+      "兌換","化石","初始寶可夢","初始夥伴"
+    ]);
+    if(usefulMethods.has(base[0])){
+      return `${base[0]}｜${base[1]}`;
+    }
+
+    return "野外遭遇／此區直接取得";
   }
 
   function dexAcquire(id){
@@ -683,7 +727,7 @@
           <img src="${imageUrl(id)}" alt="${p.zh}">
           <span class="mp-info">
             <span class="mp-name">No.${pad(id)} ${p.zh} <span class="jp">${p.jp}</span></span>
-            <span class="mp-method">此區可直接遭遇／取得</span>
+            <span class="mp-method">${mapAcquireText(id,area.name)}</span>
           </span>
           <span class="mp-state">${stateText}</span>
         </button>`;
