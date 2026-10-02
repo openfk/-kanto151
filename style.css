@@ -347,8 +347,8 @@
     }
     .map-poke img{width:42px;height:42px;object-fit:contain;image-rendering:pixelated;flex:0 0 auto}
     .map-poke .mp-info{min-width:0;flex:1}
-    .map-poke .mp-name{font-size:13px;font-weight:700}
-    .map-poke .mp-method{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.35}
+    .map-poke .mp-name{display:block;font-size:13px;font-weight:700}
+    .map-poke .mp-method{display:block;font-size:11px;color:var(--muted);margin-top:4px;line-height:1.35}
     .map-poke .mp-state{font-size:12px;font-weight:800}
     .map-poke.caught{opacity:.58}
     .map-poke.caught .mp-state{color:var(--ok)}
