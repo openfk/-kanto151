@@ -417,12 +417,69 @@
     return [...new Set(places)];
   }
 
-  function dexAcquire(id){
-    const locations=directLocations(id);
-    if(locations.length){
-      return ["取得地點", locations.join("、")];
+  // 玉虹市遊戲城（第一世代日版）獎品。數值為兌換所需代幣。
+  // 讓「只看未捕獲」除了顯示地點，也能直接告訴玩家要去哪個櫃台、花多少代幣。
+  const gameCornerPrizes={
+    red:{63:180,35:500,30:1200,147:2800,123:5500,137:9999},
+    green:{63:120,35:750,33:1200,127:2500,147:4600,137:6500},
+    blue:{63:150,25:620,116:1000,36:2880,148:5400,137:8300},
+    yellow:{63:230,37:1000,40:2680,123:6500,127:6500,137:9999}
+  };
+
+  function specialAcquireOptions(id){
+    const options=[];
+    const covered=new Set();
+
+    // 枯葉市的大蔥鴨是遊戲內交換；日版青要求的寶可夢不同。
+    if(id===83 && state.version!=="yellow"){
+      const wanted=state.version==="blue" ? "波波（ポッポ）" : "烈雀（オニスズメ）";
+      options.push(`枯葉市民宅 NPC，以${wanted}交換取得`);
+      covered.add("枯葉市");
     }
-    return acquire(id);
+
+    // 魔牆人偶固定在 2 號道路民宅交換；四版本的交換條件並不完全相同。
+    if(id===122){
+      const wanted=state.version==="blue"
+        ? "胖丁（プリン）"
+        : state.version==="yellow"
+          ? "皮皮（ピッピ）"
+          : "凱西（ケーシィ）";
+      options.push(`2號道路民宅 NPC，以${wanted}交換取得`);
+      covered.add("2號道路");
+    }
+
+    // 迷你龍在各版本都可於狩獵地帶用超級釣竿取得。
+    if(id===147){
+      options.push("狩獵地帶使用超級釣竿");
+      covered.add("狩獵地帶");
+    }
+
+    // 若目前版本可在玉虹市遊戲城兌換，補上精確代幣數。
+    const coins=gameCornerPrizes[state.version]?.[id];
+    if(coins){
+      options.push(`玉虹市遊戲城獎品兌換（${coins.toLocaleString("zh-TW")} 枚代幣）`);
+      covered.add("玉虹市");
+    }
+
+    return {options,covered};
+  }
+
+  function dexAcquire(id){
+    const base=acquire(id);
+    // 版本限定且必須靠外部交換時，不要讓地圖資料誤導成可直接取得。
+    if(base[0]==="需要交換") return base;
+
+    const {options,covered}=specialAcquireOptions(id);
+    const locations=directLocations(id).filter(place=>!covered.has(place));
+
+    if(options.length){
+      if(locations.length) options.push(`其他直接取得：${locations.join("、")}`);
+      return ["取得方式",options.join("；")];
+    }
+    if(locations.length){
+      return ["取得地點",locations.join("、")];
+    }
+    return base;
   }
 
   function load(){
@@ -459,10 +516,19 @@
     }
     if(evo[id]) return evolutionAcquire(id);
     if(common[id]) return common[id];
-    if(id===83) return ["NPC交換","枯葉市用烈雀交換取得"];
+    if(id===83){
+      if(state.version==="yellow") return ["野外","12、13號道路"];
+      return state.version==="blue"
+        ? ["NPC交換","枯葉市民宅以波波（ポッポ）交換取得"]
+        : ["NPC交換","枯葉市民宅以烈雀（オニスズメ）交換取得"];
+    }
     if(id===106 || id===107) return ["贈送","金黃市格鬥道場二選一"];
     if(id===108) return ["NPC交換","遊戲內 NPC 交換取得"];
-    if(id===122) return ["NPC交換","2號道路民宅以凱西交換"];
+    if(id===122){
+      if(state.version==="blue") return ["NPC交換","2號道路民宅以胖丁（プリン）交換取得"];
+      if(state.version==="yellow") return ["NPC交換","2號道路民宅以皮皮（ピッピ）交換取得"];
+      return ["NPC交換","2號道路民宅以凱西（ケーシィ）交換取得"];
+    }
     if(id===124) return ["NPC交換","遊戲內 NPC 交換取得"];
     return ["野外","可於此版本關都地區野外／洞窟／水域取得"];
   }
@@ -882,7 +948,8 @@
     const replay=[];
 
     for(const p of uncaught){
-      const a=acquire(p.id);
+      const rule=acquire(p.id);
+      const a=dexAcquire(p.id);
       const source=evoFrom[p.id];
       if(source && current().has(source)){
         actionable.push({p,a,source});
@@ -892,7 +959,7 @@
         replay.push({p,a});
         continue;
       }
-      if(a[0]==="需要交換"){
+      if(rule[0]==="需要交換"){
         trade.push({p,a});
         continue;
       }
