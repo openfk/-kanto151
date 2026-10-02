@@ -259,6 +259,21 @@
     eevee:[134,135,136]
   };
 
+  // 進化提示補上上一階的日文名稱，方便在日版遊戲的電腦盒子中尋找。
+  function evolutionAcquire(id){
+    const info=evo[id];
+    if(!info) return null;
+    const sourceId=evoFrom[id];
+    const source=sourceId ? pokemon[sourceId-1] : null;
+    if(!source) return info;
+    const detail=info[1];
+    const sourceLabel=`${source.zh}（${source.jp}）`;
+    const localizedDetail=detail.startsWith(source.zh)
+      ? sourceLabel + detail.slice(source.zh.length)
+      : `${sourceLabel} → ${detail}`;
+    return [info[0],localizedDetail];
+  }
+
 
 
 
@@ -442,7 +457,7 @@
     if(state.version!=="yellow" && [1,4,7].includes(id)){
       return ["初始寶可夢","大木博士研究所三選一；另外兩隻需交換"];
     }
-    if(evo[id]) return evo[id];
+    if(evo[id]) return evolutionAcquire(id);
     if(common[id]) return common[id];
     if(id===83) return ["NPC交換","枯葉市用烈雀交換取得"];
     if(id===106 || id===107) return ["贈送","金黃市格鬥道場二選一"];
@@ -906,8 +921,7 @@
 
     const rows=[];
     actionable.slice(0,6).forEach(x=>{
-      const src=pokemon[x.source-1];
-      rows.push(`<div class="guide-item"><span class="guide-pill">現在可做</span><strong>${x.p.zh}</strong>：你已經有 ${src.zh}，${x.a[1]}。</div>`);
+      rows.push(`<div class="guide-item"><span class="guide-pill">現在可做</span><strong>${x.p.zh}</strong>：${x.a[1]}。</div>`);
     });
     catchable.slice(0,6).forEach(x=>{
       rows.push(`<div class="guide-item"><span class="guide-pill">去取得</span><strong>${x.p.zh}</strong>：${x.a[1]}。</div>`);
