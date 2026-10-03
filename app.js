@@ -210,39 +210,39 @@
     100:["野外","無人發電廠"],102:["野外","狩獵地帶"],104:["野外","寶可夢塔"],109:["野外","紅蓮鎮寶可夢屋"],
     111:["野外","狩獵地帶"],113:["野外","狩獵地帶，低機率"],114:["野外","21號道路"],115:["野外","狩獵地帶"],
     116:["釣魚","各地水域"],118:["釣魚","各地水域"],120:["釣魚／野外","雙子島及各地水域"],127:["野外","狩獵地帶"],
-    128:["野外","狩獵地帶"],129:["釣魚","破舊釣竿即可"],131:["贈送","西爾佛公司"],132:["野外","13～15號道路／華藍洞窟"],
-    133:["贈送","玉虹市公寓頂樓"],137:["兌換","玉虹遊戲中心"],138:["化石","月見山二選一 → 紅蓮鎮研究所復原"],
-    140:["化石","月見山二選一 → 紅蓮鎮研究所復原"],142:["化石","秘密琥珀 → 紅蓮鎮研究所復原"],
+    128:["野外","狩獵地帶"],129:["釣魚／購買","破舊釣竿可在各地水域釣到；4號道路寶可夢中心可用500元購買"],131:["贈送","金黃市西爾佛公司 7F，擊敗勁敵後由員工贈送"],132:["野外","13～15號道路／華藍洞窟"],
+    133:["贈送","玉虹市大廈頂樓房間取得"],137:["兌換","玉虹市遊戲城獎品兌換"],138:["化石","貝殼化石：月見山二選一取得 → 紅蓮鎮寶可夢研究所復原"],
+    140:["化石","甲殼化石：月見山二選一取得 → 紅蓮鎮寶可夢研究所復原"],142:["化石","秘密琥珀：深灰市博物館後門取得 → 紅蓮鎮寶可夢研究所復原"],
     143:["固定遭遇","12號／16號道路，用寶可夢之笛"],144:["固定遭遇","雙子島深處"],145:["固定遭遇","無人發電廠"],
-    146:["固定遭遇","冠軍之路"],147:["釣魚","狩獵地帶使用超級釣竿"],150:["固定遭遇","華藍洞窟最深處"],
+    146:["固定遭遇","冠軍之路"],147:["釣魚","狩獵地帶使用厲害釣竿"],150:["固定遭遇","華藍洞窟最深處"],
     151:["特殊","正常遊戲流程無法取得"]
   };
 
   const redSpecial={
     23:["野外","4、8、9、10號道路等"],43:["野外","5、6、7、12～15、24、25號道路"],
-    56:["野外","5～8號道路"],58:["野外","7、8號道路／寶可夢屋"],123:["野外／兌換","狩獵地帶／玉虹遊戲中心"],
+    56:["野外","5～8號道路"],58:["野外","7、8號道路／寶可夢屋"],123:["野外／兌換","狩獵地帶／玉虹市遊戲城"],
     125:["野外","無人發電廠"]
   };
   const greenSpecial={
     27:["野外","4、8、9、10號道路等"],37:["野外","7、8號道路／寶可夢屋"],
     52:["野外","5～8號道路"],69:["野外","5、6、7、12～15、24、25號道路"],
-    126:["野外","寶可夢屋"],127:["野外／兌換","狩獵地帶／玉虹遊戲中心"]
+    126:["野外","寶可夢屋"],127:["野外／兌換","狩獵地帶／玉虹市遊戲城"]
   };
   const blueSpecial={
-    76:["NPC交換","日版藍可透過遊戲內交換取得隆隆岩"],
-    94:["NPC交換","日版藍可透過遊戲內交換取得耿鬼"],
+    76:["NPC交換","紅蓮鎮寶可夢研究所，以凱西交換隆隆石，交換後進化為隆隆岩"],
+    94:["NPC交換","華藍市民宅，以豪力交換鬼斯通，交換後進化為耿鬼"],
     108:["野外","日版藍可直接野外取得"],
     124:["野外","日版藍可直接野外取得"]
   };
   const yellowSpecial={
-    1:["贈送","華藍市取得妙蛙種子"],
-    4:["贈送","24號道路附近取得小火龍"],
-    7:["贈送","枯葉市取得傑尼龜"],
+    1:["贈送","華藍市民宅 NPC；皮卡丘親密度足夠時取得妙蛙種子"],
+    4:["贈送","24號道路北側 NPC 贈送小火龍"],
+    7:["贈送","枯葉市警察 NPC；擊敗枯葉道館館主後取得傑尼龜"],
     25:["初始夥伴","遊戲開始時取得皮卡丘"],
     43:["野外","黃版可野外取得"],
     56:["野外","黃版可野外取得"],
     58:["野外","黃版可野外取得"],
-    68:["NPC交換","黃版可透過遊戲內交換取得怪力"],
+    68:["NPC交換","地下通道（5～6號道路），以卡拉卡拉交換豪力，交換後進化為怪力"],
     69:["野外","黃版可野外取得"],
     123:["野外","狩獵地帶"],
     127:["野外","狩獵地帶"]
@@ -418,7 +418,6 @@
   }
 
   // 玉虹市遊戲城（第一世代日版）獎品。數值為兌換所需代幣。
-  // 讓「只看未捕獲」除了顯示地點，也能直接告訴玩家要去哪個櫃台、花多少代幣。
   const gameCornerPrizes={
     red:{63:180,35:500,30:1200,147:2800,123:5500,137:9999},
     green:{63:120,35:750,33:1200,127:2500,147:4600,137:6500},
@@ -426,31 +425,139 @@
     yellow:{63:230,37:1000,40:2680,123:6500,127:6500,137:9999}
   };
 
+  const pokeLabel=id=>{
+    const p=pokemon[id-1];
+    return p ? `${p.zh}（${p.jp}）` : `No.${id}`;
+  };
+
+  // 第一世代日版的遊戲內 NPC 交換。
+  // getId 是玩家最後實際登錄到圖鑑的寶可夢；receiveId 用於交換後立即進化的情況。
+  const inGameTrades={
+    red:[
+      {place:"2號道路",spot:"民宅 NPC",giveId:63,getId:122},
+      {place:"5號道路",spot:"地下通道（5～6號道路）NPC",giveId:29,getId:32},
+      {place:"11號道路",spot:"關卡 NPC",giveId:33,getId:30},
+      {place:"18號道路",spot:"關卡 NPC",giveId:80,getId:108},
+      {place:"華藍市",spot:"民宅 NPC",giveId:61,getId:124},
+      {place:"枯葉市",spot:"民宅 NPC",giveId:21,getId:83},
+      {place:"紅蓮鎮",spot:"寶可夢研究所 NPC",giveId:26,getId:101},
+      {place:"紅蓮鎮",spot:"寶可夢研究所 NPC",giveId:48,getId:114},
+      {place:"紅蓮鎮",spot:"寶可夢研究所 NPC",giveId:77,getId:86}
+    ],
+    green:[
+      {place:"2號道路",spot:"民宅 NPC",giveId:63,getId:122},
+      {place:"5號道路",spot:"地下通道（5～6號道路）NPC",giveId:29,getId:32},
+      {place:"11號道路",spot:"關卡 NPC",giveId:33,getId:30},
+      {place:"18號道路",spot:"關卡 NPC",giveId:80,getId:108},
+      {place:"華藍市",spot:"民宅 NPC",giveId:61,getId:124},
+      {place:"枯葉市",spot:"民宅 NPC",giveId:21,getId:83},
+      {place:"紅蓮鎮",spot:"寶可夢研究所 NPC",giveId:26,getId:101},
+      {place:"紅蓮鎮",spot:"寶可夢研究所 NPC",giveId:48,getId:114},
+      {place:"紅蓮鎮",spot:"寶可夢研究所 NPC",giveId:77,getId:86}
+    ],
+    blue:[
+      {place:"2號道路",spot:"民宅 NPC",giveId:39,getId:122},
+      {place:"5號道路",spot:"地下通道（5～6號道路）NPC",giveId:19,getId:60},
+      {place:"11號道路",spot:"關卡 NPC",giveId:112,getId:115},
+      {place:"18號道路",spot:"關卡 NPC",giveId:53,getId:128},
+      {place:"華藍市",spot:"民宅 NPC",giveId:67,receiveId:93,getId:94},
+      {place:"枯葉市",spot:"民宅 NPC",giveId:16,getId:83},
+      {place:"紅蓮鎮",spot:"寶可夢研究所 NPC",giveId:64,receiveId:75,getId:76},
+      {place:"紅蓮鎮",spot:"寶可夢研究所 NPC",giveId:86,getId:79},
+      {place:"紅蓮鎮",spot:"寶可夢研究所 NPC",giveId:58,getId:98}
+    ],
+    yellow:[
+      {place:"2號道路",spot:"民宅 NPC",giveId:35,getId:122},
+      {place:"5號道路",spot:"地下通道（5～6號道路）NPC",giveId:104,receiveId:67,getId:68},
+      {place:"11號道路",spot:"關卡 NPC",giveId:108,getId:51},
+      {place:"18號道路",spot:"關卡 NPC",giveId:114,getId:47},
+      {place:"紅蓮鎮",spot:"寶可夢研究所 NPC",giveId:55,getId:112},
+      {place:"紅蓮鎮",spot:"寶可夢研究所 NPC",giveId:58,getId:87},
+      {place:"紅蓮鎮",spot:"寶可夢研究所 NPC",giveId:115,getId:89}
+    ]
+  };
+
+  function tradeFor(id,place=null){
+    return (inGameTrades[state.version]||[]).find(t=>t.getId===id && (!place || t.place===place)) || null;
+  }
+
+  function tradeDetail(t,includePlace=true){
+    const prefix=includePlace ? `${t.place}${t.spot}，` : `${t.spot}，`;
+    if(t.receiveId && t.receiveId!==t.getId){
+      return `${prefix}以${pokeLabel(t.giveId)}交換${pokeLabel(t.receiveId)}，交換後進化為${pokeLabel(t.getId)}`;
+    }
+    return `${prefix}以${pokeLabel(t.giveId)}交換取得`;
+  }
+
   function specialAcquireOptions(id){
     const options=[];
     const covered=new Set();
 
-    // 枯葉市的大蔥鴨是遊戲內交換；日版青要求的寶可夢不同。
-    if(id===83 && state.version!=="yellow"){
-      const wanted=state.version==="blue" ? "波波（ポッポ）" : "烈雀（オニスズメ）";
-      options.push(`枯葉市民宅 NPC，以${wanted}交換取得`);
+    // 所有版本的遊戲內交換都在這裡統一處理，避免只顯示「NPC交換」卻沒寫要拿誰去換。
+    for(const t of (inGameTrades[state.version]||[]).filter(t=>t.getId===id)){
+      options.push(tradeDetail(t,true));
+      covered.add(t.place);
+    }
+
+    // 紅／綠／青的初始寶可夢；另外兩隻仍需交換或重玩。
+    if(state.version!=="yellow" && [1,4,7].includes(id)){
+      options.push("真新鎮大木博士研究所三選一取得");
+      covered.add("真新鎮");
+    }
+    if(state.version==="yellow" && id===25){
+      options.push("真新鎮大木博士研究所取得初始夥伴皮卡丘");
+      covered.add("真新鎮");
+    }
+
+    // 黃版三隻御三家為劇情贈送。
+    if(state.version==="yellow" && id===1){
+      options.push("華藍市民宅 NPC 贈送；皮卡丘親密度足夠時可取得");
+      covered.add("華藍市");
+    }
+    if(state.version==="yellow" && id===4){
+      options.push("24號道路北側 NPC 贈送");
+      covered.add("24號道路");
+    }
+    if(state.version==="yellow" && id===7){
+      options.push("枯葉市警察 NPC 贈送；擊敗枯葉道館館主後可取得");
       covered.add("枯葉市");
     }
 
-    // 魔牆人偶固定在 2 號道路民宅交換；四版本的交換條件並不完全相同。
-    if(id===122){
-      const wanted=state.version==="blue"
-        ? "胖丁（プリン）"
-        : state.version==="yellow"
-          ? "皮皮（ピッピ）"
-          : "凱西（ケーシィ）";
-      options.push(`2號道路民宅 NPC，以${wanted}交換取得`);
-      covered.add("2號道路");
+    // 一次性贈送。
+    if(id===133){
+      options.push("玉虹市大廈頂樓房間取得伊布");
+      covered.add("玉虹市");
+    }
+    if(id===106 || id===107){
+      options.push(`金黃市格鬥道場，擊敗首領後${pokeLabel(106)}／${pokeLabel(107)}二選一`);
+      covered.add("金黃市");
+    }
+    if(id===131){
+      options.push("金黃市西爾佛公司 7F，擊敗勁敵後由員工贈送");
+      covered.add("金黃市");
     }
 
-    // 迷你龍在各版本都可於狩獵地帶用超級釣竿取得。
+    // 化石復原。
+    if(id===138){
+      options.push("紅蓮鎮寶可夢研究所，用貝殼化石復原；貝殼化石在月見山與甲殼化石二選一");
+      covered.add("紅蓮鎮");
+    }
+    if(id===140){
+      options.push("紅蓮鎮寶可夢研究所，用甲殼化石復原；甲殼化石在月見山與貝殼化石二選一");
+      covered.add("紅蓮鎮");
+    }
+    if(id===142){
+      options.push("紅蓮鎮寶可夢研究所，用秘密琥珀復原；秘密琥珀在深灰市博物館後門取得");
+      covered.add("紅蓮鎮");
+    }
+
+    // 迷你龍／哈克龍在狩獵地帶的釣魚方式要明確寫釣竿。
     if(id===147){
-      options.push("狩獵地帶使用超級釣竿");
+      options.push("狩獵地帶使用厲害釣竿釣魚取得");
+      covered.add("狩獵地帶");
+    }
+    if(id===148 && state.version==="yellow"){
+      options.push("狩獵地帶使用厲害釣竿釣魚取得");
       covered.add("狩獵地帶");
     }
 
@@ -465,47 +572,107 @@
   }
 
 
-  // 地圖攻略中的取得方式要顯示「這個地點實際怎麼拿」，
-  // 不能只寫成泛用的「此區可直接遭遇／取得」。
+  // 地圖攻略中的取得方式顯示「這個地點實際怎麼拿」。
+  // 特殊取得優先於泛用的野外／釣魚文字。
   function mapAcquireText(id, place){
     const base=acquire(id);
 
-    // 已整理過的特殊取得，依目前正在看的地點顯示對應方式。
+    // 遊戲內 NPC 交換。
+    const trade=tradeFor(id,place);
+    if(trade){
+      return `NPC交換｜${tradeDetail(trade,false)}`;
+    }
+
+    // 4 號道路寶可夢中心可直接買鯉魚王，其他地點才是釣魚。
+    if(place==="4號道路" && id===129){
+      return "購買｜月見山前寶可夢中心，向 NPC 用 500 元購買";
+    }
+
+    // 黃版三隻御三家與初始夥伴。
+    if(state.version==="yellow" && place==="華藍市" && id===1){
+      return "贈送｜民宅 NPC；皮卡丘親密度足夠時可取得";
+    }
+    if(state.version==="yellow" && place==="24號道路" && id===4){
+      return "贈送｜道路北側 NPC 贈送";
+    }
+    if(state.version==="yellow" && place==="枯葉市" && id===7){
+      return "贈送｜警察 NPC；擊敗枯葉道館館主後可取得";
+    }
+    if(place==="真新鎮" && state.version!=="yellow" && [1,4,7].includes(id)){
+      return "初始寶可夢｜大木博士研究所三選一";
+    }
+    if(place==="真新鎮" && state.version==="yellow" && id===25){
+      return "初始夥伴｜大木博士研究所取得";
+    }
+
+    // 一次性贈送。
+    if(place==="玉虹市" && id===133){
+      return "贈送｜玉虹市大廈頂樓房間取得";
+    }
+    if(place==="金黃市" && (id===106 || id===107)){
+      return "贈送｜格鬥道場擊敗首領後二選一";
+    }
+    if(place==="金黃市" && id===131){
+      return "贈送｜西爾佛公司 7F，擊敗勁敵後由員工贈送";
+    }
+
+    // 化石復原。
+    if(place==="紅蓮鎮" && id===138){
+      return "化石復原｜寶可夢研究所，用貝殼化石復原（月見山二選一）";
+    }
+    if(place==="紅蓮鎮" && id===140){
+      return "化石復原｜寶可夢研究所，用甲殼化石復原（月見山二選一）";
+    }
+    if(place==="紅蓮鎮" && id===142){
+      return "化石復原｜寶可夢研究所，用秘密琥珀復原（深灰市博物館後門取得）";
+    }
+
+    // 狩獵地帶特殊釣魚。
     if(place==="狩獵地帶" && id===147){
-      return "釣魚｜使用超級釣竿";
+      return "釣魚｜使用厲害釣竿";
     }
     if(place==="狩獵地帶" && id===148 && state.version==="yellow"){
-      return "釣魚｜使用超級釣竿";
+      return "釣魚｜使用厲害釣竿";
     }
+
+    // 玉虹市遊戲城兌換。
     if(place==="玉虹市"){
       const coins=gameCornerPrizes[state.version]?.[id];
       if(coins){
         return `兌換｜遊戲城獎品兌換（${coins.toLocaleString("zh-TW")} 枚代幣）`;
       }
     }
-    if(place==="2號道路" && id===122){
-      const wanted=state.version==="blue"
-        ? "胖丁（プリン）"
-        : state.version==="yellow"
-          ? "皮皮（ピッピ）"
-          : "凱西（ケーシィ）";
-      return `NPC交換｜民宅 NPC，以${wanted}交換取得`;
+
+    // 固定遭遇。
+    if((place==="12號道路" || place==="16號道路") && id===143){
+      return "固定遭遇｜使用寶可夢之笛喚醒卡比獸";
     }
-    if(place==="枯葉市" && id===83 && state.version!=="yellow"){
-      const wanted=state.version==="blue" ? "波波（ポッポ）" : "烈雀（オニスズメ）";
-      return `NPC交換｜民宅 NPC，以${wanted}交換取得`;
+    if(place==="雙子島" && id===144){
+      return "固定遭遇｜雙子島深處的急凍鳥";
+    }
+    if(place==="無人發電廠" && id===145){
+      return "固定遭遇｜無人發電廠深處的閃電鳥";
+    }
+    if(place==="冠軍之路" && id===146){
+      return "固定遭遇｜冠軍之路內的火焰鳥";
+    }
+    if(place==="華藍洞窟" && id===150){
+      return "固定遭遇｜華藍洞窟最深處的超夢";
     }
 
-    // 其他已知的特殊取得方式，也直接放進地圖卡片。
+    // 一般取得也把「方式」說明清楚，不再用含糊的「此區直接取得」。
+    if(base[0]==="釣魚") return `釣魚｜${id===129 ? "使用破舊釣竿" : "此區水域"}`;
+    if(base[0]==="釣魚／購買") return "釣魚｜使用破舊釣竿";
+    if(base[0]==="衝浪") return "衝浪｜此區水域遭遇";
+    if(base[0]==="釣魚／野外") return "野外／釣魚｜此區可直接取得";
+    if(base[0]==="野外" || base[0].includes("野外")) return "野外遭遇｜此區可直接捕獲";
+
     const usefulMethods=new Set([
-      "釣魚","衝浪","釣魚／野外","固定遭遇","贈送","NPC交換",
-      "兌換","化石","初始寶可夢","初始夥伴"
+      "固定遭遇","贈送","NPC交換","兌換","化石","初始寶可夢","初始夥伴"
     ]);
-    if(usefulMethods.has(base[0])){
-      return `${base[0]}｜${base[1]}`;
-    }
+    if(usefulMethods.has(base[0])) return `${base[0]}｜${base[1]}`;
 
-    return "野外遭遇／此區直接取得";
+    return `${base[0]}｜${base[1]}`;
   }
 
   function dexAcquire(id){
@@ -517,14 +684,35 @@
     const locations=directLocations(id).filter(place=>!covered.has(place));
 
     if(options.length){
-      if(locations.length) options.push(`其他直接取得：${locations.join("、")}`);
+      if(locations.length){
+        const short=locations.length>6 ? `${locations.slice(0,6).join("、")} 等` : locations.join("、");
+        options.push(`其他直接取得：${short}`);
+      }
       return ["取得方式",options.join("；")];
     }
+
+    // 若進化型本身也能直接捕獲，兩種方式一起顯示，避免「進化提示」和「直接捕獲地點」互相蓋掉。
+    const evolutionMethods=new Set(["進化","道具進化","交換進化"]);
+    if(evolutionMethods.has(base[0])){
+      if(locations.length){
+        const short=locations.length>6 ? `${locations.slice(0,6).join("、")} 等` : locations.join("、");
+        return ["取得方式",`${base[0]}：${base[1]}；也可直接取得：${short}`];
+      }
+      return base;
+    }
+
+    // 贈送、化石、固定遭遇等原本就有明確方法時，保留方法，不要被地點清單蓋掉。
+    const preserveMethods=new Set([
+      "固定遭遇","贈送","NPC交換","兌換","化石","特殊","初始寶可夢","初始夥伴"
+    ]);
+    if(preserveMethods.has(base[0])) return base;
+
     if(locations.length){
       return ["取得地點",locations.join("、")];
     }
     return base;
   }
+
 
   function load(){
     try{
@@ -566,14 +754,20 @@
         ? ["NPC交換","枯葉市民宅以波波（ポッポ）交換取得"]
         : ["NPC交換","枯葉市民宅以烈雀（オニスズメ）交換取得"];
     }
-    if(id===106 || id===107) return ["贈送","金黃市格鬥道場二選一"];
-    if(id===108) return ["NPC交換","遊戲內 NPC 交換取得"];
+    if(id===106 || id===107) return ["贈送","金黃市格鬥道場，擊敗首領後二選一"];
+    if(id===108){
+      const t=tradeFor(id);
+      if(t) return ["NPC交換",tradeDetail(t,true)];
+    }
     if(id===122){
       if(state.version==="blue") return ["NPC交換","2號道路民宅以胖丁（プリン）交換取得"];
       if(state.version==="yellow") return ["NPC交換","2號道路民宅以皮皮（ピッピ）交換取得"];
       return ["NPC交換","2號道路民宅以凱西（ケーシィ）交換取得"];
     }
-    if(id===124) return ["NPC交換","遊戲內 NPC 交換取得"];
+    if(id===124){
+      const t=tradeFor(id);
+      if(t) return ["NPC交換",tradeDetail(t,true)];
+    }
     return ["野外","可於此版本關都地區野外／洞窟／水域取得"];
   }
 
