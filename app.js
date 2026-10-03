@@ -210,11 +210,11 @@
     100:["野外","無人發電廠"],102:["野外","狩獵地帶"],104:["野外","寶可夢塔"],109:["野外","紅蓮鎮寶可夢屋"],
     111:["野外","狩獵地帶"],113:["野外","狩獵地帶，低機率"],114:["野外","21號道路"],115:["野外","狩獵地帶"],
     116:["釣魚","各地水域"],118:["釣魚","各地水域"],120:["釣魚／野外","雙子島及各地水域"],127:["野外","狩獵地帶"],
-    128:["野外","狩獵地帶"],129:["釣魚／購買","破舊釣竿可在各地水域釣到；4號道路寶可夢中心可用500元購買"],131:["贈送","金黃市西爾佛公司 7F，擊敗勁敵後由員工贈送"],132:["野外","13～15號道路／華藍洞窟"],
+    128:["野外","狩獵地帶"],129:["釣魚／購買","破舊釣竿（ボロのつりざお）可在各地水域釣到；4號道路寶可夢中心可用500元購買"],131:["贈送","金黃市西爾佛公司 7F，擊敗勁敵後由員工贈送"],132:["野外","13～15號道路／華藍洞窟"],
     133:["贈送","玉虹市大廈頂樓房間取得"],137:["兌換","玉虹市遊戲城獎品兌換"],138:["化石","貝殼化石（かいのカセキ）：月見山二選一取得 → 紅蓮鎮寶可夢研究所復原"],
     140:["化石","甲殼化石（こうらのカセキ）：月見山二選一取得 → 紅蓮鎮寶可夢研究所復原"],142:["化石","秘密琥珀（ひみつのコハク）：深灰市博物館後門取得 → 紅蓮鎮寶可夢研究所復原"],
-    143:["固定遭遇","12號／16號道路，用寶可夢之笛"],144:["固定遭遇","雙子島深處"],145:["固定遭遇","無人發電廠"],
-    146:["固定遭遇","冠軍之路"],147:["釣魚","狩獵地帶使用厲害釣竿"],150:["固定遭遇","華藍洞窟最深處"],
+    143:["固定遭遇","12號／16號道路，用寶可夢之笛（ポケモンのふえ）"],144:["固定遭遇","雙子島深處"],145:["固定遭遇","無人發電廠"],
+    146:["固定遭遇","冠軍之路"],147:["釣魚","狩獵地帶使用厲害釣竿（すごいつりざお）"],150:["固定遭遇","華藍洞窟最深處"],
     151:["特殊","正常遊戲流程無法取得"]
   };
 
@@ -553,11 +553,11 @@
 
     // 迷你龍／哈克龍在狩獵地帶的釣魚方式要明確寫釣竿。
     if(id===147){
-      options.push("狩獵地帶使用厲害釣竿釣魚取得");
+      options.push("狩獵地帶使用厲害釣竿（すごいつりざお）釣魚取得");
       covered.add("狩獵地帶");
     }
     if(id===148 && state.version==="yellow"){
-      options.push("狩獵地帶使用厲害釣竿釣魚取得");
+      options.push("狩獵地帶使用厲害釣竿（すごいつりざお）釣魚取得");
       covered.add("狩獵地帶");
     }
 
@@ -572,20 +572,25 @@
   }
 
 
-  // 地圖攻略中的取得方式顯示「這個地點實際怎麼拿」。
-  // 特殊取得優先於泛用的野外／釣魚文字。
-  function mapAcquireText(id, place){
-    const base=acquire(id);
+  // 地圖攻略中的取得方式只顯示「這個地點實際怎麼拿」。
+  // 重要：地圖資料已把該地點可直接取得的寶可夢列出，因此不能再用全域「進化方式」覆蓋當地遭遇方式。
+  const rodNames={
+    old:"破舊釣竿（ボロのつりざお）",
+    good:"好釣竿（いいつりざお）",
+    super:"厲害釣竿（すごいつりざお）"
+  };
+  const rodText=kind=>`釣魚｜使用${rodNames[kind]}`;
 
-    // 遊戲內 NPC 交換。
+  function mapAcquireText(id, place){
+    // 1. 特殊取得永遠優先：NPC 交換、贈送、兌換、化石、固定遭遇。
     const trade=tradeFor(id,place);
     if(trade){
       return `NPC交換｜${tradeDetail(trade,false)}`;
     }
 
-    // 4 號道路寶可夢中心可直接買鯉魚王，其他地點才是釣魚。
+    // 4 號道路的鯉魚王既能買也能用破舊釣竿釣；把最有用的兩種方式都寫出來。
     if(place==="4號道路" && id===129){
-      return "購買｜月見山前寶可夢中心，向 NPC 用 500 元購買";
+      return `購買／釣魚｜月見山前寶可夢中心向 NPC 用 500 元購買；或使用${rodNames.old}`;
     }
 
     // 黃版三隻御三家與初始夥伴。
@@ -627,14 +632,6 @@
       return "化石復原｜寶可夢研究所，用秘密琥珀（ひみつのコハク）復原（深灰市博物館後門取得）";
     }
 
-    // 狩獵地帶特殊釣魚。
-    if(place==="狩獵地帶" && id===147){
-      return "釣魚｜使用厲害釣竿";
-    }
-    if(place==="狩獵地帶" && id===148 && state.version==="yellow"){
-      return "釣魚｜使用厲害釣竿";
-    }
-
     // 玉虹市遊戲城兌換。
     if(place==="玉虹市"){
       const coins=gameCornerPrizes[state.version]?.[id];
@@ -645,7 +642,7 @@
 
     // 固定遭遇。
     if((place==="12號道路" || place==="16號道路") && id===143){
-      return "固定遭遇｜使用寶可夢之笛喚醒卡比獸";
+      return "固定遭遇｜使用寶可夢之笛（ポケモンのふえ）喚醒卡比獸";
     }
     if(place==="雙子島" && id===144){
       return "固定遭遇｜雙子島深處的急凍鳥";
@@ -660,19 +657,155 @@
       return "固定遭遇｜華藍洞窟最深處的超夢";
     }
 
-    // 一般取得也把「方式」說明清楚，不再用含糊的「此區直接取得」。
-    if(base[0]==="釣魚") return `釣魚｜${id===129 ? "使用破舊釣竿" : "此區水域"}`;
-    if(base[0]==="釣魚／購買") return "釣魚｜使用破舊釣竿";
-    if(base[0]==="衝浪") return "衝浪｜此區水域遭遇";
-    if(base[0]==="釣魚／野外") return "野外／釣魚｜此區可直接取得";
-    if(base[0]==="野外" || base[0].includes("野外")) return "野外遭遇｜此區可直接捕獲";
+    // 2. 各特殊地點的「當地實際遭遇方式」。
+    if(place==="冠軍之路"){
+      return "野外遭遇｜洞窟內步行遭遇";
+    }
+    if(place==="月見山"){
+      return "野外遭遇｜洞窟內步行遭遇";
+    }
+    if(place==="地鼠洞穴"){
+      return "野外遭遇｜洞窟內步行遭遇";
+    }
+    if(place==="常青森林"){
+      return "野外遭遇｜森林草叢步行遭遇";
+    }
+    if(place==="紫苑鎮／寶可夢塔"){
+      return "野外遭遇｜寶可夢塔內步行遭遇（需西爾佛檢視鏡／シルフスコープ辨識幽靈）";
+    }
+    if(place==="岩山隧道"){
+      return "野外遭遇｜洞窟內步行遭遇";
+    }
 
-    const usefulMethods=new Set([
-      "固定遭遇","贈送","NPC交換","兌換","化石","初始寶可夢","初始夥伴"
-    ]);
-    if(usefulMethods.has(base[0])) return `${base[0]}｜${base[1]}`;
+    // 無人發電廠：霹靂電球與頑皮雷彈除了步行遭遇，也有偽裝成道具球的固定個體。
+    if(place==="無人發電廠"){
+      if(id===100 || id===101){
+        return "野外／固定遭遇｜設施內步行可遇；另有偽裝成道具球的固定個體";
+      }
+      return "野外遭遇｜設施內步行遭遇";
+    }
 
-    return `${base[0]}｜${base[1]}`;
+    // 華藍洞窟：第一世代洞窟內沒有衝浪遭遇；釣魚依釣竿分類，其餘皆為洞窟步行遭遇。
+    if(place==="華藍洞窟"){
+      const caveFishing={
+        129:"old",60:"good",118:"good",
+        80:"super",99:"super",117:"super",119:"super"
+      };
+      if(caveFishing[id]) return rodText(caveFishing[id]);
+      return "野外遭遇｜洞窟內步行遭遇";
+    }
+
+    // 城鎮水域：第一世代這些地點沒有水面野生遭遇，都是釣魚。
+    if(place==="常青市"){
+      if(id===129) return rodText("old");
+      if(id===60 || id===118) return rodText("good");
+      if(id===72) return rodText("super");
+    }
+    if(place==="真新鎮"){
+      if(id===129) return rodText("old");
+      if(id===60 || id===118) return rodText("good");
+      if(id===72 || id===120) return rodText("super");
+    }
+    if(place==="華藍市"){
+      if(id===129) return rodText("old");
+      if(id===60 || id===118) return rodText("good");
+      if([54,98,119].includes(id)) return rodText("super");
+    }
+    if(place==="玉虹市"){
+      if(id===129) return rodText("old");
+      if(id===60 || id===118) return rodText("good");
+      if(id===61 || id===79) return rodText("super");
+    }
+    if(place==="枯葉市"){
+      if(id===129) return rodText("old");
+      if(id===60 || id===118) return rodText("good");
+      if([72,90,98,116,120].includes(id)) return rodText("super");
+    }
+    if(place==="淺紅市"){
+      if(id===129) return rodText("old");
+      if(id===60 || id===118) return rodText("good");
+      if([98,119,130].includes(id)) return rodText("super");
+    }
+
+    // 狩獵地帶：第一世代沒有水面野生遭遇，水中目標都是釣魚；其餘為草叢遭遇。
+    if(place==="狩獵地帶"){
+      if(id===129) return rodText("old");
+      if(id===60 || id===118) return rodText("good");
+      if([54,79,98,147,148].includes(id)) return rodText("super");
+      return "野外遭遇｜狩獵地帶草叢遭遇";
+    }
+
+    // 雙子島：紅／綠／青沒有水面野生遭遇；黃版新增部分衝浪遭遇。
+    if(place==="雙子島"){
+      if(state.version==="yellow" && id===72) return "衝浪｜洞窟水面遭遇";
+      if(state.version==="yellow" && id===120) return `衝浪／釣魚｜洞窟水面可遇；也可使用${rodNames.super}`;
+      if(id===129) return rodText("old");
+      if(id===60 || id===118) return rodText("good");
+      if([90,98,99,116,117,120].includes(id)) return rodText("super");
+      return "野外遭遇｜洞窟內步行遭遇";
+    }
+
+    // 紅蓮鎮：先前的 NPC 交換／化石已在上方處理；水域是釣魚，其餘目標來自寶可夢屋。
+    if(place==="紅蓮鎮"){
+      if(id===129) return rodText("old");
+      if(id===60 || id===118) return rodText("good");
+      if([72,90,116,120].includes(id)) return rodText("super");
+      return "野外遭遇｜寶可夢屋內步行遭遇";
+    }
+
+    // 金黃市的目標全是一次性贈送；正常情況會在上方已返回。
+    if(place==="金黃市"){
+      return "特殊取得｜此地點為贈送／二選一取得";
+    }
+
+    // 3. 1～25 號道路。先分出釣魚、衝浪，再把其餘直接遭遇標成草叢／陸地遭遇。
+    const routeMatch=place.match(/^(\d+)號道路$/);
+    if(routeMatch){
+      const routeNo=Number(routeMatch[1]);
+      if(id===129) return rodText("old");
+      if(id===60 || id===118) return rodText("good");
+
+      // 黃版新增的水面遭遇，以及 19～21 號水道的衝浪遭遇。
+      const surfByRoute={
+        6:[54,55],
+        12:[79,80],
+        13:[79,80],
+        19:[72],
+        20:[72],
+        21:[72]
+      };
+      if((surfByRoute[routeNo]||[]).includes(id)){
+        return "衝浪｜水面遭遇";
+      }
+
+      // 各道路以厲害釣竿才能直接取得的目標。只有 routeData 已列出的版本才會出現在卡片中。
+      const superRodByRoute={
+        4:[54,98,119],
+        6:[90,98],
+        10:[61,79,98,99,116],
+        11:[72,90,98,116],
+        12:[72,98,116,117],
+        13:[72,98,116,117],
+        17:[72,90,98],
+        18:[72,90,98],
+        19:[73,90,116,120],
+        20:[73,90,116,120],
+        21:[73,90,116,120],
+        22:[61],
+        23:[61,80,99,117,119],
+        24:[54,98,119],
+        25:[54,98,99,119]
+      };
+      if((superRodByRoute[routeNo]||[]).includes(id)){
+        return rodText("super");
+      }
+
+      return "野外遭遇｜道路草叢／陸地步行遭遇";
+    }
+
+    // 理論上 mapAreas / routeData 的目標都應在上面被當地規則處理。
+    // 保留安全 fallback，但不再顯示「進化」以免地圖頁誤導。
+    return "直接取得｜此地點可直接取得";
   }
 
   function dexAcquire(id){
